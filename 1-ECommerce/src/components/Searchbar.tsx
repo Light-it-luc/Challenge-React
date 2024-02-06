@@ -5,7 +5,7 @@ export default function Searchbar() {
 
     return (
         <input
-            className="w-72 rounded-xl"
+            className="w-72 rounded-xl md:w-44"
             style={{ background: 'no-repeat center right 1rem url("/images/Magnifer.svg")' }}
             type="text"
             value={searchValue}
