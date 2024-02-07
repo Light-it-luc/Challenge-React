@@ -1,15 +1,12 @@
 import { useState } from "react";
+import type { Option } from "../interfaces";
 import MenuOption from "./MenuOption";
 import Sidebar from "./Sidebar";
 
-interface Option {
-    id: number;
-    name: string;
-}
 
-export default function Menu() {
-    const [isMenuVisible, setIsMenuVisible] = useState(false)
-    const [selectedOption, setSelectedOption] = useState(0)
+export default function Menu(): JSX.Element {
+    const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false)
+    const [selectedOption, setSelectedOption] = useState<number>(0)
 
     const handleMenuClick = (): void => {
         setIsMenuVisible(true)
@@ -21,7 +18,7 @@ export default function Menu() {
     }
 
     const handleMenuOptionClick = (optionId: number): void => {
-        const newOptionValue = (selectedOption === optionId) ? 0 : optionId;
+        const newOptionValue: number = (selectedOption === optionId) ? 0 : optionId;
         setSelectedOption(newOptionValue)
     }
 
@@ -47,26 +44,28 @@ export default function Menu() {
         { id: 21, name: 'SALE'}
     ]
 
-    const menuOptions = options.map(option => {
-        return (
-            <MenuOption
-                key={option.id}
-                active={selectedOption === option.id}
-                option={option}
-                onOptionClick={() => handleMenuOptionClick(option.id)}
-            />
-        )
+    const menuOptions: JSX.Element[] = options
+        .map(option => {
+            return (
+                <MenuOption
+                    key={option.id}
+                    active={selectedOption === option.id}
+                    option={option}
+                    onOptionClick={() => handleMenuOptionClick(option.id)}
+                />
+            )
     })
 
-    const hardcodedSubMenuOptions = subMenuOptions.map(option => {
-        return (
-            <MenuOption
-                key={option.id}
-                active={false}
-                option={option}
-                onOptionClick={() => alert(`suboption "${option.name}" clicked`)}
-            />
-        )
+    const hardcodedSubMenuOptions: JSX.Element[] = subMenuOptions
+        .map(option => {
+            return (
+                <MenuOption
+                    key={option.id}
+                    active={false}
+                    option={option}
+                    onOptionClick={() => alert(`suboption "${option.name}" clicked`)}
+                />
+            )
     })
 
     return (
@@ -87,7 +86,8 @@ export default function Menu() {
             >
 
                 <button
-                    className={'absolute flex items-center justify-center p-2.5 w-5 h-5 top-8 left-8 rounded-full border border-red-600 text-red-600 text-xs'}
+                    className={`absolute flex items-center justify-center p-2.5 w-5 h-5 top-8 left-8
+                    rounded-full border border-red-600 text-red-600 text-xs`}
                     onClick={handleCloseMenu}>
                     ✕
                 </button>

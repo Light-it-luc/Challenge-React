@@ -1,11 +1,11 @@
 import { useState } from "react"
 
-export default function Searchbar() {
-    const [searchValue, setSearchValue] = useState('')
+export default function Searchbar(): JSX.Element {
+    const [searchValue, setSearchValue] = useState<string>('')
 
     return (
         <input
-            className="w-72 rounded-xl md:w-44"
+            className="w-full rounded-xl md:w-44"
             style={{ background: 'no-repeat center right 1rem url("/images/Magnifer.svg")' }}
             type="text"
             value={searchValue}
