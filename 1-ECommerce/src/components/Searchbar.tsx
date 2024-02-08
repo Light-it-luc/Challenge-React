@@ -1,7 +1,7 @@
 import { useState } from "react"
 
-export default function Searchbar(): JSX.Element {
-    const [searchValue, setSearchValue] = useState<string>('')
+export const Searchbar = () => {
+    const [searchValue, setSearchValue] = useState('')
 
     return (
         <input

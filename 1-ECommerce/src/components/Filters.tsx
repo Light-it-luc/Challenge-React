@@ -1,15 +1,10 @@
-import Menu from './Menu'
-import Searchbar from './Searchbar';
-import SortBy from './SortBy';
+import { Menu } from './Menu'
+import { Searchbar } from './Searchbar';
+import { SortBy } from './SortBy';
 
-interface SortOptions {
-    id: number,
-    label: string
-}
+export const Filters = () => {
 
-export default function Filters(): JSX.Element {
-
-    const sortOptions: SortOptions[] = [
+    const sortOptions = [
         { id: 1, label: 'Sory By' },
         { id: 2, label: 'Favorites' },
         { id: 3, label: 'A-Z' },
@@ -18,8 +13,8 @@ export default function Filters(): JSX.Element {
         { id: 6, label: 'High Prices' },
     ]
 
-    const options: JSX.Element[] = sortOptions
-        .map((option: SortOptions) => {
+    const options = sortOptions
+        .map((option) => {
             return (
                 <option
                     key={option.id}

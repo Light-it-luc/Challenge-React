@@ -1,9 +1,9 @@
 
 interface Props {
-    children: JSX.Element[]
+    children: React.ReactNode
 }
 
-export default function SortBy({ children }: Props) {
+export const SortBy = ({ children }: Props) => {
     return (
         <select
             className="w-full rounded-xl text-gray-500 md:w-44"

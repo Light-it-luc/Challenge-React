@@ -1,4 +1,4 @@
-import type { Option } from "../interfaces"
+import type { Option } from "../Interfaces"
 
 interface Props {
     active: boolean;
@@ -6,7 +6,7 @@ interface Props {
     onOptionClick: () => void;
 }
 
-export default function MenuOption({ active, option, onOptionClick }: Props): JSX.Element {
+export const MenuOption = ({ active, option, onOptionClick }: Props) => {
     return (
         <button 
             className={`flex flex-row justify-between items-center w-full px-4 py-2
