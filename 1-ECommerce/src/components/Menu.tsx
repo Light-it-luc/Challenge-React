@@ -78,12 +78,12 @@ export const Menu = () => {
 
             <Sidebar
                 isMenuVisible={isMenuVisible}
-                classWhenActive={'translate-x-full z-50'}
+                classWhenActive="translate-x-full z-50"
             >
 
                 <button
-                    className={`absolute flex items-center justify-center p-2.5 w-5 h-5 top-8 left-8
-                    rounded-full border border-red-600 text-red-600 text-xs`}
+                    className="absolute flex items-center justify-center p-2.5 w-5 h-5 top-8 left-8
+                    rounded-full border border-red-600 text-red-600 text-xs"
                     onClick={handleCloseMenu}>
                     ✕
                 </button>
@@ -94,7 +94,7 @@ export const Menu = () => {
 
             <Sidebar
                 isMenuVisible={selectedOption !== 0}
-                classWhenActive={'translate-x-[200%] text-xs z-10'}
+                classWhenActive="translate-x-[200%] text-xs z-10"
             >
                 {hardcodedSubMenuOptions}
             </Sidebar>
