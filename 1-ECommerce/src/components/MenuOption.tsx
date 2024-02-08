@@ -1,12 +1,12 @@
 import type { Option } from "../Interfaces"
 
-interface Props {
+interface MenuOptionProps {
     active: boolean;
     option: Option;
     onOptionClick: () => void;
 }
 
-export const MenuOption = ({ active, option, onOptionClick }: Props) => {
+export const MenuOption = ({ active, option, onOptionClick }: MenuOptionProps) => {
     return (
         <button 
             className={`flex flex-row justify-between items-center w-full px-4 py-2

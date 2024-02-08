@@ -1,9 +1,9 @@
 
-interface Props {
+interface SortByProps {
     children: React.ReactNode
 }
 
-export const SortBy = ({ children }: Props) => {
+export const SortBy = ({ children }: SortByProps) => {
     return (
         <select
             className="w-full rounded-xl text-gray-500 md:w-44"
