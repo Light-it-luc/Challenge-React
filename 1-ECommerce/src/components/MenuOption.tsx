@@ -1,4 +1,8 @@
-import type { Option } from "../Interfaces"
+
+interface Option {
+    id: number;
+    name: string;
+}
 
 interface MenuOptionProps {
     active: boolean;
