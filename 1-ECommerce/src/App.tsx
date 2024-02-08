@@ -1,5 +1,5 @@
 import "./index.css";
-import Filters from "./components/Filters"
+import { Filters } from "./components/Filters"
 
 export default function App() {
     return (
