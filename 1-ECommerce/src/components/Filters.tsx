@@ -24,7 +24,7 @@ export const Filters = () => {
         })
 
     return (
-        <div className="flex flex-col md:flex-row md:justify-between px-8 gap-4 lg:gap-24">
+        <nav className="flex flex-col md:flex-row md:justify-between px-8 gap-4 lg:gap-24">
             <div className="flex flex-row gap-8 items-center">
                 <Menu />
                 <h1 className="text-2xl font-bold lg:text-4xl">Find what you need</h1>
@@ -36,6 +36,6 @@ export const Filters = () => {
                     {options}
                 </SortBy>
             </div>
-        </div>
+        </nav>
     )
 }
