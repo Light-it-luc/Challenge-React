@@ -1,13 +1,13 @@
-
 interface ButtonProp {
-    text: string;
-    onButtonClick: () => void;
+  text: string;
+  onButtonClick: () => void;
 }
 
-export const Button = ({ text, onButtonClick }: ButtonProp) =>
-    <button
-        className="text-white py-4 px-12 rounded-full font-bold bg-orange-500"
-        onClick={onButtonClick}
-    >
-        {text}
-    </button>
+export const Button = ({ text, onButtonClick }: ButtonProp) => (
+  <button
+    className="rounded-full bg-orange-500 px-12 py-4 font-bold text-white"
+    onClick={onButtonClick}
+  >
+    {text}
+  </button>
+);
