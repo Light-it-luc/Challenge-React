@@ -4,6 +4,38 @@ import { MenuIcon } from "~/ui/Icons";
 import { MenuOption } from "./MenuOption";
 import { Sidebar } from "./Sidebar";
 
+const options = [
+    { id: 1, name: 'New In'},
+    { id: 2, name: 'Clothing'},
+    { id: 3, name: 'Footwear'},
+    { id: 4, name: 'Accesories'},
+    { id: 5, name: 'SALE'}
+]
+
+const subMenuOptions = [
+    { id: 11, name: 'New In' },
+    { id: 12, name: 'See All'},
+    { id: 13, name: 'Coats'},
+    { id: 14, name: 'Beach clothes'},
+    { id: 15, name: 'Sweaters & hoodies'},
+    { id: 16, name: 'Shirts'},
+    { id: 17, name: 'Jeans & pants'},
+    { id: 18, name: 'T-shirts'},
+    { id: 19, name: 'Shorts'},
+    { id: 20, name: 'Underwear'},
+    { id: 21, name: 'SALE'}
+]
+
+const hardcodedSubMenuOptions = subMenuOptions
+    .map(option =>
+            <MenuOption
+                key={option.id}
+                active={false}
+                option={option}
+                onOptionClick={() => alert(`suboption "${option.name}" clicked`)}
+            />
+    )
+
 
 export const Menu = () => {
     const [isMenuVisible, setIsMenuVisible] = useState(false)
@@ -23,28 +55,6 @@ export const Menu = () => {
         setSelectedOption(newOptionValue)
     }
 
-    const options = [
-        { id: 1, name: 'New In'},
-        { id: 2, name: 'Clothing'},
-        { id: 3, name: 'Footwear'},
-        { id: 4, name: 'Accesories'},
-        { id: 5, name: 'SALE'}
-    ]
-
-    const subMenuOptions = [
-        { id: 11, name: 'New In' },
-        { id: 12, name: 'See All'},
-        { id: 13, name: 'Coats'},
-        { id: 14, name: 'Beach clothes'},
-        { id: 15, name: 'Sweaters & hoodies'},
-        { id: 16, name: 'Shirts'},
-        { id: 17, name: 'Jeans & pants'},
-        { id: 18, name: 'T-shirts'},
-        { id: 19, name: 'Shorts'},
-        { id: 20, name: 'Underwear'},
-        { id: 21, name: 'SALE'}
-    ]
-
     const menuOptions = options
         .map(option =>
                 <MenuOption
@@ -53,24 +63,15 @@ export const Menu = () => {
                     option={option}
                     onOptionClick={() => handleMenuOptionClick(option.id)}
                 />
-    )
-
-    const hardcodedSubMenuOptions = subMenuOptions
-        .map(option =>
-                <MenuOption
-                    key={option.id}
-                    active={false}
-                    option={option}
-                    onOptionClick={() => alert(`suboption "${option.name}" clicked`)}
-                />
-    )
+        )
 
     return (
         <>
-            <button onClick={handleMenuClick}>
-                <div className="flex items-center justify-center rounded-full border-2 border-red-600 p-1">
-                    <MenuIcon />
-                </div>
+            <button
+                className="flex items-center justify-center rounded-full border-2 border-red-600 p-1"
+                onClick={handleMenuClick}
+            >
+                <MenuIcon />
             </button>
 
             <Sidebar
