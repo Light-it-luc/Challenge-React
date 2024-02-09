@@ -11,7 +11,6 @@ interface MenuOptionProps {
     onOptionClick: () => void;
 }
 
-
 export const MenuOption = ({ active, option, onOptionClick }: MenuOptionProps) =>
     <button 
         className={`flex flex-row justify-between items-center w-full px-4 py-2

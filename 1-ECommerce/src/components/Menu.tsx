@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { MenuIcon } from "~/ui/Icons";
+import { MenuIcon } from "../ui/Icons";
 import { MenuOption } from "./MenuOption";
 import { Sidebar } from "./Sidebar";
 
@@ -27,14 +27,14 @@ const subMenuOptions = [
 ]
 
 const hardcodedSubMenuOptions = subMenuOptions
-    .map(option =>
-            <MenuOption
-                key={option.id}
-                active={false}
-                option={option}
-                onOptionClick={() => alert(`suboption "${option.name}" clicked`)}
-            />
-    )
+        .map(option =>
+                <MenuOption
+                    key={option.id}
+                    active={false}
+                    option={option}
+                    onOptionClick={() => alert(`suboption "${option.name}" clicked`)}
+                />
+        )
 
 
 export const Menu = () => {

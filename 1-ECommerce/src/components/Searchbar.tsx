@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import { MagnifierIcon } from "~/ui/Icons"
+import { MagnifierIcon } from "../ui/Icons"
 
 export const Searchbar = () => {
     const [searchValue, setSearchValue] = useState('')
