@@ -6,9 +6,9 @@ export const Searchbar = () => {
     const [searchValue, setSearchValue] = useState('')
 
     return (
-        <div className="relative w-full rounded-xl md:w-44">
+        <div className="relative w-full rounded-xl md:w-36 lg:w-44">
             <input
-                className="w-full h-full rounded-xl"
+                className="w-full h-full rounded-xl pr-10"
                 type="text"
                 value={searchValue}
                 placeholder="Search"
