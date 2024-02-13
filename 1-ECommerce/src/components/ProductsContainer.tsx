@@ -18,7 +18,7 @@ export interface Product {
   images: string[];
 }
 
-type Views = "loading" | "error" | "products" | "favorites";
+type Views = "loading" | "error" | "products";
 
 export const ProductsContainer = () => {
   const [favorites, setFavorites] = useLocalStorage<Product[]>("favorites", []);
@@ -40,30 +40,32 @@ export const ProductsContainer = () => {
   const components = {
     loading: Loader,
     error: Error,
-    products: () => Products({ products, favorites, onFavoriteClick }),
-    favorites: () =>
-      Products({ products: favorites, favorites, onFavoriteClick }),
+    products: () =>
+      Products({
+        products: viewIsFavorites ? favorites : products,
+        favorites,
+        onFavoriteClick,
+      }),
   };
 
-  const view: Views = loading
-    ? "loading"
-    : error
-      ? "error"
-      : viewIsFavorites
-        ? "favorites"
-        : "products";
+  let view: Views;
+  if (loading) {
+    view = "loading";
+  } else if (error) {
+    view = "error";
+  } else {
+    view = "products";
+  }
 
   const Component = components[view];
 
   return (
-    <>
-      <div
-        id="products-container"
-        className="flex h-full max-w-screen-lg flex-col items-center justify-center
+    <div
+      id="products-container"
+      className="flex h-full max-w-screen-lg flex-col items-center justify-center
         gap-4 px-4 py-16 md:mx-auto md:flex-row md:flex-wrap lg:flex-row"
-      >
-        <Component />
-      </div>
-    </>
+    >
+      <Component />
+    </div>
   );
 };

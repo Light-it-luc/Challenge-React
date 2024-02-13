@@ -13,10 +13,10 @@ export const SortBy = () => {
   const sortOptions = [
     { id: 1, label: "Sory By", value: "" },
     { id: 2, label: "Favorites", value: "favorites" },
-    { id: 3, label: "A-Z", value: "a-z" },
-    { id: 4, label: "Z-A", value: "z-a" },
-    { id: 5, label: "Low Prices", value: "low_prices" },
-    { id: 6, label: "High Prices", value: "high_prices" },
+    { id: 3, label: "A-Z", value: "az" },
+    { id: 4, label: "Z-A", value: "za" },
+    { id: 5, label: "Low Prices", value: "lowPrices" },
+    { id: 6, label: "High Prices", value: "highPrices" },
   ];
 
   const handleSelectChange = (selectValue: string) => {
