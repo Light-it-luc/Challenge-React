@@ -1,5 +1,5 @@
 import { FavoriteButton } from "./FavoriteButton";
-import type { Product } from "./Products";
+import type { Product } from "./ProductsContainer";
 
 interface ProductCardProp {
   product: Product;
