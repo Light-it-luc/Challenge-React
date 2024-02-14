@@ -5,8 +5,6 @@ import { Error } from "./Error";
 import { Loader } from "./Loader";
 import { Products } from "./Products";
 
-type Views = "loading" | "error" | "products";
-
 export const ProductsContainer = () => {
   const [favorites, setFavorites] = useLocalStorage<Product[]>("favorites", []);
   const { products, loading, error } = useFilteredProducts();
@@ -24,27 +22,19 @@ export const ProductsContainer = () => {
     setFavorites(newFavorites);
   };
 
-  const components = {
-    loading: Loader,
-    error: Error,
-    products: () =>
+  let Component: () => JSX.Element;
+  if (loading) {
+    Component = Loader;
+  } else if (error) {
+    Component = Error;
+  } else {
+    Component = () =>
       Products({
         products: viewIsFavorites ? favorites : products,
         favorites,
         onFavoriteClick,
-      }),
-  };
-
-  let view: Views;
-  if (loading) {
-    view = "loading";
-  } else if (error) {
-    view = "error";
-  } else {
-    view = "products";
+      });
   }
-
-  const Component = components[view];
 
   return (
     <main
