@@ -1,8 +1,14 @@
 import { PRODUCTS_PER_PAGE } from "../constants";
 import type { Product } from "../hooks/useFilteredProducts";
 import { Button } from "./Button";
-import { NothingToShow } from "./NothingToShow";
+import { Error } from "./Error";
 import { ProductCard } from "./ProductCard";
+
+const NothingToShow = () =>
+  Error({
+    heading: "Nothing to see here...",
+    subheading: "No products to display",
+  });
 
 const sortAZ = (a: Product, b: Product): number =>
   a.title.localeCompare(b.title, "en", { sensitivity: "base" });

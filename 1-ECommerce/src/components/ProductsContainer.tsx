@@ -27,7 +27,11 @@ export const ProductsContainer = () => {
   if (loading) {
     Component = Loader;
   } else if (error) {
-    Component = Error;
+    Component = () =>
+      Error({
+        heading: "Oops!",
+        subheading: "Looks like something went wrong...",
+      });
   } else {
     Component = () =>
       Products({
