@@ -1,9 +1,9 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import type { Product } from "../hooks/useFilteredProducts";
 import { Button } from "./Button";
 import { NothingToShow } from "./NothingToShow";
 import { ProductCard } from "./ProductCard";
-import type { Product } from "./ProductsContainer";
 
 interface ProductProps {
   products: Product[];

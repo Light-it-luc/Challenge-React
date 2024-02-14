@@ -1,5 +1,5 @@
+import type { Product } from "../hooks/useFilteredProducts";
 import { FavoriteButton } from "./FavoriteButton";
-import type { Product } from "./ProductsContainer";
 
 interface ProductCardProp {
   product: Product;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-interface Product {
+export interface Product {
   id: number;
   title: string;
   description: string;

@@ -1,22 +1,9 @@
+import type { Product } from "../hooks/useFilteredProducts";
 import { useFilteredProducts } from "../hooks/useFilteredProducts";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Error } from "./Error";
 import { Loader } from "./Loader";
 import { Products } from "./Products";
-
-export interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-}
 
 type Views = "loading" | "error" | "products";
 
