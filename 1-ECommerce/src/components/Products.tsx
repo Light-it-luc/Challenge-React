@@ -1,5 +1,5 @@
+import { PRODUCTS_PER_PAGE } from "../constants";
 import type { Product } from "../hooks/useFilteredProducts";
-import { PRODUCTS_PER_PAGE } from "../hooks/useFilteredProducts";
 import { Button } from "./Button";
 import { NothingToShow } from "./NothingToShow";
 import { ProductCard } from "./ProductCard";

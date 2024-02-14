@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-export const PRODUCTS_PER_PAGE = 6;
+import { PRODUCTS_PER_PAGE } from "../constants";
 
 export interface Product {
   id: number;
