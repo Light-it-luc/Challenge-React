@@ -87,5 +87,5 @@ export const Products = ({
     </div>
   );
 
-  return <>{products.length ? renderedProducts : <NothingToShow />}</>;
+  return products.length ? renderedProducts : <NothingToShow />;
 };

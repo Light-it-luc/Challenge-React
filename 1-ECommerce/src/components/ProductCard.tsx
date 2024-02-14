@@ -32,7 +32,7 @@ export const ProductCard = ({
     </div>
 
     <div className="flex w-full justify-between px-2">
-      <div className="text-gray-500">€ {product.price}</div>
+      <p className="text-gray-500">€ {product.price}</p>
 
       <FavoriteButton
         inFavorites={inFavorites}
