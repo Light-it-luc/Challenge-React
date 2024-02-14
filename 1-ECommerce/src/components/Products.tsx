@@ -1,15 +1,8 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
-
 import type { Product } from "../hooks/useFilteredProducts";
+import { PRODUCTS_PER_PAGE } from "../hooks/useFilteredProducts";
 import { Button } from "./Button";
 import { NothingToShow } from "./NothingToShow";
 import { ProductCard } from "./ProductCard";
-
-interface ProductProps {
-  products: Product[];
-  favorites: Product[];
-  onFavoriteClick: (product: Product) => void;
-}
 
 const sortAZ = (a: Product, b: Product): number =>
   a.title.localeCompare(b.title, "en", { sensitivity: "base" });
@@ -27,40 +20,40 @@ const sortingFunctions = {
   highPrices: sortHighPrice,
 };
 
+interface ProductProps {
+  products: Product[];
+  favorites: Product[];
+  onFavoriteClick: (product: Product) => void;
+  apiTotalProducts: number;
+  limit: number;
+  setLimit: (newLimit: number) => void;
+}
+
 export const Products = ({
   products,
   favorites,
   onFavoriteClick,
+  apiTotalProducts,
+  limit,
+  setLimit,
 }: ProductProps) => {
-  const [queryParams, setQueryParams] = useSearchParams();
-  const navigate = useNavigate();
-
-  const API_TOTAL_PRODUCTS = 100;
-  const PRODUCTS_PER_PAGE = 6;
-  const currentLimit = Number(queryParams.get("limit") ?? 6);
+  const queryParams = new URLSearchParams(location.search);
 
   const view = String(queryParams.get("view")) as keyof typeof sortingFunctions;
   const sortedProducts = products.toSorted(sortingFunctions[view]);
 
-  const isLoadMoreVisible =
-    products.length > 0 && currentLimit < API_TOTAL_PRODUCTS;
+  const isLoadMoreVisible = products.length > 0 && limit < apiTotalProducts;
 
   const handleLoadMoreClick = () => {
     const newLimit =
-      currentLimit + PRODUCTS_PER_PAGE < API_TOTAL_PRODUCTS
-        ? currentLimit + PRODUCTS_PER_PAGE
-        : API_TOTAL_PRODUCTS;
+      limit + PRODUCTS_PER_PAGE < apiTotalProducts
+        ? limit + PRODUCTS_PER_PAGE
+        : apiTotalProducts;
 
-    queryParams.set("limit", JSON.stringify(newLimit));
-    setQueryParams(queryParams);
-
-    navigate(
-      { pathname: "/", search: queryParams.toString() },
-      { replace: true },
-    );
+    setLimit(newLimit);
   };
 
-  const renderedProducts = (
+  const RenderedProducts = () => (
     <div className="flex flex-col items-center justify-center gap-16">
       <div
         className="flex flex-col items-center justify-center gap-4
@@ -81,5 +74,5 @@ export const Products = ({
     </div>
   );
 
-  return products.length ? renderedProducts : <NothingToShow />;
+  return products.length ? <RenderedProducts /> : <NothingToShow />;
 };

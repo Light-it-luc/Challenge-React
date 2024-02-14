@@ -7,7 +7,8 @@ import { Products } from "./Products";
 
 export const ProductsContainer = () => {
   const [favorites, setFavorites] = useLocalStorage<Product[]>("favorites", []);
-  const { products, loading, error } = useFilteredProducts();
+  const { products, loading, error, apiTotalProducts, limit, setLimit } =
+    useFilteredProducts();
 
   const queryParams = new URLSearchParams(window.location.search);
   const viewIsFavorites = queryParams.get("view") === "favorites";
@@ -31,8 +32,11 @@ export const ProductsContainer = () => {
     Component = () =>
       Products({
         products: viewIsFavorites ? favorites : products,
+        apiTotalProducts,
         favorites,
         onFavoriteClick,
+        limit,
+        setLimit,
       });
   }
 
