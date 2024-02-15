@@ -1,6 +1,23 @@
 import { BravoIcon, AlphaIcon, CharlieIcon, ExtraIcon } from "../ui/icons";
 
-export const subscriptions = {
+export interface Subscription {
+  name: String;
+  monthlyPrice: Number;
+  weeklyPrice: Number;
+  subheading: String;
+  description: String;
+  icon: () => JSX.Element;
+  featured: Boolean;
+}
+
+interface Subscriptions {
+  alpha: Subscription;
+  bravo: Subscription;
+  charlie: Subscription;
+  extra: Subscription;
+}
+
+export const subscriptions: Subscriptions = {
   bravo: {
     name: "Bravo",
     monthlyPrice: 10,

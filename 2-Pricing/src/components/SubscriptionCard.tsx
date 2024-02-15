@@ -1,8 +1,16 @@
+import { Subscription } from "../constants";
+
+interface SubscriptionCardProps {
+  subscription: Subscription;
+  isMonthlyView: boolean;
+  handleAddToCartClick: () => void;
+}
+
 export const SubscriptionCard = ({
   subscription,
   isMonthlyView,
   handleAddToCartClick,
-}) => {
+}: SubscriptionCardProps) => {
   const Icon = subscription.icon;
 
   return (
@@ -18,8 +26,8 @@ export const SubscriptionCard = ({
           <h4>
             $
             {isMonthlyView
-              ? subscription.monthlyPrice
-              : subscription.weeklyPrice}
+              ? `${subscription.monthlyPrice}`
+              : `${subscription.weeklyPrice}`}
           </h4>
         </div>
         <div>

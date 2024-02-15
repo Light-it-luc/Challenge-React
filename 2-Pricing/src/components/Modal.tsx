@@ -1,19 +1,22 @@
+import { Subscription } from "../constants";
+import { Cart } from "../App";
+
+interface ModalProps {
+  setIsModalVisible: (visible: boolean) => void;
+  subscriptionCandidate: Subscription;
+  itemsInCart: Cart;
+  setItemsInCart: (newSubscriptions: Cart) => void;
+}
+
 export const Modal = ({
   setIsModalVisible,
   subscriptionCandidate,
   itemsInCart,
   setItemsInCart,
-}) => {
-  const addToCart = (subscription) => {
-    const inCart = structuredClone(itemsInCart);
-
-    if (subscription.name in inCart) {
-      inCart[subscription.name].count++;
-    } else {
-      inCart[subscription.name].count = 1;
-    }
-
-    setItemsInCart(inCart);
+}: ModalProps) => {
+  // REFACTOR
+  const addToCart = (subscription: Subscription) => {
+    return;
   };
 
   const handleConfirm = () => {

@@ -5,14 +5,26 @@ import { View } from "./components/View";
 import { Header } from "./components/Header";
 import { Subscriptions } from "./components/Subscriptions";
 
-import { subscriptions } from "./constants";
+import { Subscription, subscriptions } from "./constants";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+
+export interface Cart {
+  alpha: number;
+  bravo: number;
+  charlie: number;
+  extra: number;
+}
 
 function App() {
-  const [itemsInCart, setItemsInCart] = useState({});
+  const [itemsInCart, setItemsInCart] = useLocalStorage<Cart>("cart", {
+    alpha: 0,
+    bravo: 0,
+    charlie: 0,
+    extra: 0,
+  });
   const [isMonthlyView, setIsMonthlyView] = useState(true);
-  const [subscriptionCandidate, setSubscriptionCandidate] = useState(
-    subscriptions.featured
-  );
+  const [subscriptionCandidate, setSubscriptionCandidate] =
+    useState<Subscription>(subscriptions.bravo);
   const [isModalVisible, setIsModalVisible] = useState(false);
   //const [isCartOpen, setIsCartOpen] = useState(false);
 

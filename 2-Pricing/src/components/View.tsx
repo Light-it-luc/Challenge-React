@@ -1,4 +1,9 @@
-export const View = ({ isMonthlyView, setIsMonthlyView }) => {
+interface ViewProps {
+  isMonthlyView: boolean;
+  setIsMonthlyView: (monthly: boolean) => void;
+}
+
+export const View = ({ isMonthlyView, setIsMonthlyView }: ViewProps) => {
   return (
     <div>
       <button
