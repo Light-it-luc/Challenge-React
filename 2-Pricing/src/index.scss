@@ -1,7 +1,8 @@
-$featured-color: #EA580C;
+$alpha-color: blue;
 $bravo-color: #EAB308;
 $charlie-color: #22C55E;
 $extra-color: #EF4444;
+$featured-color: #EA580C;
 
 html {
   font-family: 'Manrope', sans-serif;
@@ -18,9 +19,12 @@ body {
   margin: 0;
   min-height: 100%;
   font-family: 'Manrope', sans-serif;
+  font-weight: 300;
   color: white;
   background-color: rgba(0, 0, 0, 0.75);
 }
+
+@mixin box-shadow($color) { filter: drop-shadow(0 0.75rem 1.25rem $color); }
 
 @mixin flex-column {
   display: flex;
@@ -35,11 +39,16 @@ main {
 
 header {
   text-align: center;
+  max-width: 500px;
+  padding-top: 3rem;
 
   h1 {
     font-family: "Ubuntu", sans-serif;
     font-weight: 500;
     font-size: 2.25rem;
+  }
+  p {
+    font-size: 1.2rem;
   }
 }
 
@@ -57,7 +66,6 @@ header {
     transition: all 0.35s ease-in-out;
     background: none;
     border: none;
-
   }
 
   #left-view { border-radius: 4rem 0 0 4rem; }
@@ -71,5 +79,70 @@ header {
 
   .inactive {
     background-color: rgba(0, 0, 0, 0.25);
+  }
+}
+
+#subscription-container {
+  @include flex-column;
+  gap: 2rem;
+  padding-bottom: 4rem;
+}
+
+.card {
+  @include flex-column;
+  box-sizing: border-box;
+  padding: 1.875rem 0.35rem;
+  width: 14.6875rem;
+  border: solid 1px white;
+  border-radius: 1%;
+  transition: 0.2s ease-in-out;
+  text-align: center;
+
+  p {
+      transition: 0.2s ease-in-out;
+      font-size: 0.8125;
+  }
+
+  .top { 
+    @include flex-column;
+    border-bottom: solid 1px gray;
+  }
+
+  .bottom { @include flex-column; }
+
+  .title {
+    transition: 0.2s ease-in-out;
+    opacity: 0.7;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .icon {
+    @include flex-column;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    background-color: white;
+  }
+
+  .shadow-alpha { @include box-shadow($alpha-color); }
+  .shadow-bravo { @include box-shadow($bravo-color); }
+  .shadow-charlie { @include box-shadow($charlie-color); }
+  .shadow-extra { @include box-shadow($extra-color); }
+  .shadow-featured { @include box-shadow($featured-color); }
+
+  .price {
+    transition: 0.2s ease-in-out;
+    font-weight: 300;
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    p { font-size: 1rem; }
+    .price { font-size: 2rem; }
+    .title { font-size: 1.5rem; }
   }
 }

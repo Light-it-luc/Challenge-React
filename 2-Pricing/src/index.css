@@ -13,6 +13,7 @@ body {
   margin: 0;
   min-height: 100%;
   font-family: "Manrope", sans-serif;
+  font-weight: 300;
   color: white;
   background-color: rgba(0, 0, 0, 0.75);
 }
@@ -26,11 +27,16 @@ main {
 
 header {
   text-align: center;
+  max-width: 500px;
+  padding-top: 3rem;
 }
 header h1 {
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
   font-size: 2.25rem;
+}
+header p {
+  font-size: 1.2rem;
 }
 
 #view {
@@ -61,6 +67,91 @@ header h1 {
 }
 #view .inactive {
   background-color: rgba(0, 0, 0, 0.25);
+}
+
+#subscription-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 4rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.875rem 0.35rem;
+  width: 14.6875rem;
+  border: solid 1px white;
+  border-radius: 1%;
+  transition: 0.2s ease-in-out;
+  text-align: center;
+}
+.card p {
+  transition: 0.2s ease-in-out;
+  font-size: 0.8125;
+}
+.card .top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: solid 1px gray;
+}
+.card .bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card .title {
+  transition: 0.2s ease-in-out;
+  opacity: 0.7;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.card .icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  background-color: white;
+}
+.card .shadow-alpha {
+  filter: drop-shadow(0 0.75rem 1.25rem blue);
+}
+.card .shadow-bravo {
+  filter: drop-shadow(0 0.75rem 1.25rem #EAB308);
+}
+.card .shadow-charlie {
+  filter: drop-shadow(0 0.75rem 1.25rem #22C55E);
+}
+.card .shadow-extra {
+  filter: drop-shadow(0 0.75rem 1.25rem #EF4444);
+}
+.card .shadow-featured {
+  filter: drop-shadow(0 0.75rem 1.25rem #EA580C);
+}
+.card .price {
+  transition: 0.2s ease-in-out;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+.card:hover p {
+  font-size: 1rem;
+}
+.card:hover .price {
+  font-size: 2rem;
+}
+.card:hover .title {
+  font-size: 1.5rem;
 }
 
 /*# sourceMappingURL=index.css.map */

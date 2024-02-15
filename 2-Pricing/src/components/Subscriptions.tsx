@@ -18,7 +18,7 @@ export const Subscriptions = ({
   };
 
   return (
-    <div>
+    <div id="subscription-container">
       {Object.values(subscriptions).map((subscription) => (
         <SubscriptionCard
           key={subscription.name}

@@ -14,16 +14,20 @@ export const SubscriptionCard = ({
   const Icon = subscription.icon;
 
   return (
-    <div>
-      <div>
-        <div>
-          <h4>{subscription.name} Pack</h4>
-        </div>
-        <div>
+    <div className="card">
+      <div className="top">
+        <h4 className="itle">{subscription.name} Pack</h4>
+        <div
+          className={`icon shadow-${
+            subscription.featured
+              ? "featured"
+              : subscription.name.toLocaleLowerCase()
+          }`}
+        >
           <Icon />
         </div>
         <div>
-          <h4>
+          <h4 className="price">
             $
             {isMonthlyView
               ? `${subscription.monthlyPrice}`
