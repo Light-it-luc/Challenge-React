@@ -5,15 +5,17 @@ interface ViewProps {
 
 export const View = ({ isMonthlyView, setIsMonthlyView }: ViewProps) => {
   return (
-    <div>
+    <div id="view">
       <button
-        className={`${isMonthlyView ? "" : ""}`}
+        id="left-view"
+        className={`${isMonthlyView ? "active" : "inactive"}`}
         onClick={() => setIsMonthlyView(true)}
       >
         Monthly view
       </button>
       <button
-        className={`${isMonthlyView ? "" : ""}`}
+        id="right-view"
+        className={`${isMonthlyView ? "inactive" : "active"}`}
         onClick={() => setIsMonthlyView(false)}
       >
         Weekly view
