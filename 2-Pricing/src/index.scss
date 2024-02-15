@@ -4,6 +4,12 @@ $charlie-color: #22C55E;
 $extra-color: #EF4444;
 $featured-color: #EA580C;
 
+.alpha-color { color: $alpha-color; }
+.bravo-color { color: $bravo-color; }
+.charlie-color { color: $charlie-color; }
+.extra-color { color: $extra-color }
+.featured-color { color: $featured-color; }
+
 html {
   font-family: 'Manrope', sans-serif;
   height: 100%;
@@ -92,7 +98,7 @@ header {
   @include flex-column;
   box-sizing: border-box;
   padding: 1.875rem 0.35rem;
-  width: 14.6875rem;
+  width: 15rem;
   border: solid 1px white;
   border-radius: 1%;
   transition: 0.2s ease-in-out;
@@ -103,6 +109,8 @@ header {
       font-size: 0.8125;
   }
 
+  div { width: 100%; }
+
   .top { 
     @include flex-column;
     border-bottom: solid 1px gray;
@@ -112,7 +120,7 @@ header {
 
   .title {
     transition: 0.2s ease-in-out;
-    opacity: 0.7;
+    opacity: 0.9;
     font-size: 1.125rem;
     font-weight: 600;
   }
@@ -127,22 +135,55 @@ header {
     background-color: white;
   }
 
-  .shadow-alpha { @include box-shadow($alpha-color); }
-  .shadow-bravo { @include box-shadow($bravo-color); }
-  .shadow-charlie { @include box-shadow($charlie-color); }
-  .shadow-extra { @include box-shadow($extra-color); }
-  .shadow-featured { @include box-shadow($featured-color); }
-
   .price {
     transition: 0.2s ease-in-out;
     font-weight: 300;
     font-size: 1.5rem;
   }
-
-  &:hover {
-    transform: scale(1.05);
-    p { font-size: 1rem; }
-    .price { font-size: 2rem; }
-    .title { font-size: 1.5rem; }
-  }
 }
+
+.featured {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  color: gray;
+  font-weight: bolder;
+  border: unset;
+
+  .tag {
+      font-family: 'Montserrat', sans-serif;
+      position: absolute;
+      padding: 0.75rem 1.875rem;
+      top: 0.6rem;
+      left: -1.875rem;
+      transform: rotate(315deg);
+      background-color: var(--featured-color);
+      color: white;
+      font-size: 0.5625rem;
+      text-transform: uppercase;
+  }
+
+  .price { color: black; }
+}
+
+.shadow-alpha { @include box-shadow($alpha-color); }
+.shadow-bravo { @include box-shadow($bravo-color); }
+.shadow-charlie { @include box-shadow($charlie-color); }
+.shadow-extra { @include box-shadow($extra-color); }
+.shadow-featured { @include box-shadow($featured-color); }
+
+@mixin button($bg-color) {
+  font-size: 0.8125rem;
+  text-align: center;
+  border: none;
+  padding: 0.625rem;
+  border-radius: 1.5rem;
+  background-color: $bg-color;
+  width: 50%;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.primary-button { @include button($featured-color); color: white; }
+.secondary-button { @include button(white) }
+

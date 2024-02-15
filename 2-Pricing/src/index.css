@@ -1,3 +1,23 @@
+.alpha-color {
+  color: blue;
+}
+
+.bravo-color {
+  color: #EAB308;
+}
+
+.charlie-color {
+  color: #22C55E;
+}
+
+.extra-color {
+  color: #EF4444;
+}
+
+.featured-color {
+  color: #EA580C;
+}
+
 html {
   font-family: "Manrope", sans-serif;
   height: 100%;
@@ -83,7 +103,7 @@ header p {
   align-items: center;
   box-sizing: border-box;
   padding: 1.875rem 0.35rem;
-  width: 14.6875rem;
+  width: 15rem;
   border: solid 1px white;
   border-radius: 1%;
   transition: 0.2s ease-in-out;
@@ -92,6 +112,9 @@ header p {
 .card p {
   transition: 0.2s ease-in-out;
   font-size: 0.8125;
+}
+.card div {
+  width: 100%;
 }
 .card .top {
   display: flex;
@@ -106,7 +129,7 @@ header p {
 }
 .card .title {
   transition: 0.2s ease-in-out;
-  opacity: 0.7;
+  opacity: 0.9;
   font-size: 1.125rem;
   font-weight: 600;
 }
@@ -121,37 +144,79 @@ header p {
   border-radius: 100%;
   background-color: white;
 }
-.card .shadow-alpha {
-  filter: drop-shadow(0 0.75rem 1.25rem blue);
-}
-.card .shadow-bravo {
-  filter: drop-shadow(0 0.75rem 1.25rem #EAB308);
-}
-.card .shadow-charlie {
-  filter: drop-shadow(0 0.75rem 1.25rem #22C55E);
-}
-.card .shadow-extra {
-  filter: drop-shadow(0 0.75rem 1.25rem #EF4444);
-}
-.card .shadow-featured {
-  filter: drop-shadow(0 0.75rem 1.25rem #EA580C);
-}
 .card .price {
   transition: 0.2s ease-in-out;
   font-weight: 300;
   font-size: 1.5rem;
 }
-.card:hover {
-  transform: scale(1.05);
+
+.featured {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  color: gray;
+  font-weight: bolder;
+  border: unset;
 }
-.card:hover p {
-  font-size: 1rem;
+.featured .tag {
+  font-family: "Montserrat", sans-serif;
+  position: absolute;
+  padding: 0.75rem 1.875rem;
+  top: 0.6rem;
+  left: -1.875rem;
+  transform: rotate(315deg);
+  background-color: var(--featured-color);
+  color: white;
+  font-size: 0.5625rem;
+  text-transform: uppercase;
 }
-.card:hover .price {
-  font-size: 2rem;
+.featured .price {
+  color: black;
 }
-.card:hover .title {
-  font-size: 1.5rem;
+
+.shadow-alpha {
+  filter: drop-shadow(0 0.75rem 1.25rem blue);
+}
+
+.shadow-bravo {
+  filter: drop-shadow(0 0.75rem 1.25rem #EAB308);
+}
+
+.shadow-charlie {
+  filter: drop-shadow(0 0.75rem 1.25rem #22C55E);
+}
+
+.shadow-extra {
+  filter: drop-shadow(0 0.75rem 1.25rem #EF4444);
+}
+
+.shadow-featured {
+  filter: drop-shadow(0 0.75rem 1.25rem #EA580C);
+}
+
+.primary-button {
+  font-size: 0.8125rem;
+  text-align: center;
+  border: none;
+  padding: 0.625rem;
+  border-radius: 1.5rem;
+  background-color: #EA580C;
+  width: 50%;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  color: white;
+}
+
+.secondary-button {
+  font-size: 0.8125rem;
+  text-align: center;
+  border: none;
+  padding: 0.625rem;
+  border-radius: 1.5rem;
+  background-color: white;
+  width: 50%;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 
 /*# sourceMappingURL=index.css.map */

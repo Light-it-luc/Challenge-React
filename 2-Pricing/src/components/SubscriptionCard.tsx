@@ -1,4 +1,5 @@
 import { Subscription } from "../constants";
+import { Button } from "./Button";
 
 interface SubscriptionCardProps {
   subscription: Subscription;
@@ -14,9 +15,10 @@ export const SubscriptionCard = ({
   const Icon = subscription.icon;
 
   return (
-    <div className="card">
+    <div className={`card ${subscription.featured ? "featured" : ""}`}>
+      {subscription.featured && <div className="tag">Featured</div>}
       <div className="top">
-        <h4 className="itle">{subscription.name} Pack</h4>
+        <h4 className="title">{subscription.name} Pack</h4>
         <div
           className={`icon shadow-${
             subscription.featured
@@ -39,13 +41,18 @@ export const SubscriptionCard = ({
         </div>
       </div>
 
-      <div>
+      <div className="bottom">
         <p>{subscription.description}</p>
 
-        {/* EXTRACT TO BUTTON COMPONENT */}
-        <button type="button" onClick={handleAddToCartClick}>
-          Add to cart
-        </button>
+        <Button
+          className={`${
+            subscription.featured
+              ? "primary-button "
+              : `secondary-button ${subscription.name.toLowerCase()}-color`
+          }`}
+          text="Add to cart"
+          onClick={handleAddToCartClick}
+        />
       </div>
     </div>
   );

@@ -1,13 +1,13 @@
 import { BravoIcon, AlphaIcon, CharlieIcon, ExtraIcon } from "../ui/icons";
 
 export interface Subscription {
-  name: String;
-  monthlyPrice: Number;
-  weeklyPrice: Number;
-  subheading: String;
-  description: String;
+  name: string;
+  monthlyPrice: number;
+  weeklyPrice: number;
+  subheading: string;
+  description: string;
   icon: () => JSX.Element;
-  featured: Boolean;
+  featured: boolean;
 }
 
 interface Subscriptions {
