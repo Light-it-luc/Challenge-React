@@ -32,14 +32,26 @@ body {
 
 @mixin box-shadow($color) { filter: drop-shadow(0 0.75rem 1.25rem $color); }
 
-@mixin flex-column {
+@mixin flex-column() {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+@mixin button($bg-color) {
+  font-size: 0.8125rem;
+  text-align: center;
+  border: none;
+  padding: 0.625rem;
+  border-radius: 1.5rem;
+  background-color: $bg-color;
+  width: 50%;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
 main {
-  @include flex-column;
+  @include flex-column();
   gap: 2rem;
 }
 
@@ -89,15 +101,15 @@ header {
 }
 
 #subscription-container {
-  @include flex-column;
+  @include flex-column();
   gap: 2rem;
   padding-bottom: 4rem;
 }
 
 .card {
-  @include flex-column;
+  @include flex-column();
   box-sizing: border-box;
-  padding: 1.875rem 0.35rem;
+  padding: 1.875rem 1rem;
   width: 15rem;
   border: solid 1px white;
   border-radius: 1%;
@@ -112,21 +124,21 @@ header {
   div { width: 100%; }
 
   .top { 
-    @include flex-column;
+    @include flex-column();
     border-bottom: solid 1px gray;
   }
 
-  .bottom { @include flex-column; }
+  .bottom { @include flex-column(); }
 
   .title {
     transition: 0.2s ease-in-out;
     opacity: 0.9;
-    font-size: 1.125rem;
+    font-size: 1.175rem;
     font-weight: 600;
   }
 
   .icon {
-    @include flex-column;
+    @include flex-column();
     align-items: center;
     justify-content: center;
     width: 5rem;
@@ -172,18 +184,67 @@ header {
 .shadow-extra { @include box-shadow($extra-color); }
 .shadow-featured { @include box-shadow($featured-color); }
 
-@mixin button($bg-color) {
-  font-size: 0.8125rem;
-  text-align: center;
-  border: none;
-  padding: 0.625rem;
-  border-radius: 1.5rem;
-  background-color: $bg-color;
-  width: 50%;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-}
-
 .primary-button { @include button($featured-color); color: white; }
 .secondary-button { @include button(white) }
 
+#backdrop-modal {
+    @include flex-column();
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 15;
+  }
+
+#modal {
+  @include flex-column();
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  position: relative;
+  text-align: center;
+  width: 300px;
+  height: 200px;
+  border-radius: 1rem;
+  background-color: white;
+  z-index: 20;
+
+  h2, p { margin: 0; }
+  h2 { color: black; }
+  p { color: gray; }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: gray;
+    font-size: 1.5rem;
+  }
+
+  .cancel-button {
+    @extend .secondary-button;
+    color: $featured-color;
+    width: 7rem;
+    border: 1px solid $featured-color;
+  }
+
+  .confirm-button {
+    @extend .primary-button;
+    width: 7rem;
+    border: 1px solid $featured-color;
+
+  }
+}

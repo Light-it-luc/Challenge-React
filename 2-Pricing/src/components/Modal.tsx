@@ -29,17 +29,25 @@ export const Modal = ({
   };
 
   return (
-    <div id="modal">
-      <h2>Add to cart?</h2>
-      <p>
-        Are you sure you want to add {subscriptionCandidate.name} Pack to your
-        cart?
-      </p>
-
-      <div>
-        <button onClick={handleCloseModal}>Cancel</button>
-        <button onClick={handleConfirm}>Confirm</button>
+    <button id="backdrop-modal" onClick={handleCloseModal}>
+      <div id="modal">
+        <button className="close-modal" onClick={handleCloseModal}>
+          ×
+        </button>
+        <h2>Add to cart?</h2>
+        <p>
+          Are you sure you want to add {subscriptionCandidate.name} Pack to your
+          cart?
+        </p>
+        <div className="button-container">
+          <button className="cancel-button" onClick={handleCloseModal}>
+            Cancel
+          </button>
+          <button className="confirm-button" onClick={handleConfirm}>
+            Confirm
+          </button>
+        </div>
       </div>
-    </div>
+    </button>
   );
 };

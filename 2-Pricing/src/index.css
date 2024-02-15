@@ -102,7 +102,7 @@ header p {
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  padding: 1.875rem 0.35rem;
+  padding: 1.875rem 1rem;
   width: 15rem;
   border: solid 1px white;
   border-radius: 1%;
@@ -130,7 +130,7 @@ header p {
 .card .title {
   transition: 0.2s ease-in-out;
   opacity: 0.9;
-  font-size: 1.125rem;
+  font-size: 1.175rem;
   font-weight: 600;
 }
 .card .icon {
@@ -194,7 +194,7 @@ header p {
   filter: drop-shadow(0 0.75rem 1.25rem #EA580C);
 }
 
-.primary-button {
+.primary-button, #modal .confirm-button {
   font-size: 0.8125rem;
   text-align: center;
   border: none;
@@ -207,7 +207,7 @@ header p {
   color: white;
 }
 
-.secondary-button {
+.secondary-button, #modal .cancel-button {
   font-size: 0.8125rem;
   text-align: center;
   border: none;
@@ -217,6 +217,70 @@ header p {
   width: 50%;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+}
+
+#backdrop-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 15;
+}
+
+#modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  position: relative;
+  text-align: center;
+  width: 300px;
+  height: 200px;
+  border-radius: 1rem;
+  background-color: white;
+  z-index: 20;
+}
+#modal h2, #modal p {
+  margin: 0;
+}
+#modal h2 {
+  color: black;
+}
+#modal p {
+  color: gray;
+}
+#modal .button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+#modal .close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: gray;
+  font-size: 1.5rem;
+}
+#modal .cancel-button {
+  color: #EA580C;
+  width: 7rem;
+  border: 1px solid #EA580C;
+}
+#modal .confirm-button {
+  width: 7rem;
+  border: 1px solid #EA580C;
 }
 
 /*# sourceMappingURL=index.css.map */
