@@ -1,10 +1,14 @@
 import "./index.css";
-import { NavBar } from "./components/NavBar"
+
+import { NavBar } from "./components/NavBar";
+import { ProductsContainer } from "./components/ProductsContainer";
 
 export default function App() {
-    return (
-        <div className="contaiener py-8 w-full h-full lg:flex lg:flex-col">
-            <NavBar />
-        </div>
-    )
+  return (
+    <div className="contaiener h-full w-full py-8 lg:flex lg:flex-col">
+      <NavBar />
+
+      <ProductsContainer />
+    </div>
+  );
 }

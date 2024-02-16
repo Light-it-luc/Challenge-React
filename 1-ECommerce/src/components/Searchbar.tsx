@@ -1,21 +1,41 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { MagnifierIcon } from "~/ui/Icons"
+import { MagnifierIcon } from "../ui/Icons";
 
 export const Searchbar = () => {
-    const [searchValue, setSearchValue] = useState('')
+  const queryParams = new URLSearchParams(location.search);
+  const [searchValue, setSearchValue] = useState(queryParams.get("q") ?? "");
+  const navigate = useNavigate();
 
-    return (
-        <div className="relative w-full rounded-xl md:w-36 lg:w-44">
-            <input
-                className="w-full h-full rounded-xl pr-10"
-                type="text"
-                value={searchValue}
-                placeholder="Search"
-                onChange={(event) => setSearchValue(event.target.value)}
-            />
+  const handleSearchChange = (inputValue: string) => {
+    if (inputValue) {
+      queryParams.set("q", inputValue);
+    } else {
+      queryParams.delete("q");
+    }
 
-            <MagnifierIcon className="absolute right-4 top-3" />
-        </div>
-    )
-}
+    setSearchValue(inputValue);
+    navigate(
+      {
+        pathname: "/",
+        search: queryParams.toString(),
+      },
+      { replace: true },
+    );
+  };
+
+  return (
+    <div className="relative w-full rounded-xl md:w-36 lg:w-44">
+      <input
+        className="h-full w-full rounded-xl pr-10"
+        type="text"
+        value={searchValue}
+        placeholder="Search"
+        onChange={(event) => handleSearchChange(event.target.value)}
+      />
+
+      <MagnifierIcon className="absolute right-4 top-3" />
+    </div>
+  );
+};
