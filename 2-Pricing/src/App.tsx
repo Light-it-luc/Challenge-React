@@ -7,41 +7,56 @@ import { Subscriptions } from "./components/Subscriptions";
 
 import { Subscription, subscriptions } from "./constants";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { CartIcon } from "./ui/icons";
+import { Cart as CartComponent } from "./components/Cart";
 
 export interface Cart {
-  alpha: number;
-  bravo: number;
-  charlie: number;
-  extra: number;
+  alpha?: number;
+  bravo?: number;
+  charlie?: number;
+  extra?: number;
 }
 
 function App() {
-  const [itemsInCart, setItemsInCart] = useLocalStorage<Cart>("cart", {
-    alpha: 0,
-    bravo: 0,
-    charlie: 0,
-    extra: 0,
-  });
+  const [inCart, setinCart] = useLocalStorage<Cart>("cart", {});
   const [isMonthlyView, setIsMonthlyView] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [subscriptionCandidate, setSubscriptionCandidate] =
     useState<Subscription>(subscriptions.bravo);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  //const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
-    <main>
-      {/* <button onClick={() => setIsCartOpen(true)}><CartIcon /></button> */}
+    <main className={`${isCartOpen || isModalVisible ? "no-scroll" : ""}`}>
+      <button
+        id="cart-icon"
+        className={`${isCartOpen ? "first-layer" : "second-layer"}`}
+        onClick={() => setIsCartOpen(true)}
+      >
+        <CartIcon />
+      </button>
+
       <Header />
+
       <View isMonthlyView={isMonthlyView} setIsMonthlyView={setIsMonthlyView} />
+
       {isModalVisible && (
         <Modal
           setIsModalVisible={setIsModalVisible}
           subscriptionCandidate={subscriptionCandidate}
-          itemsInCart={itemsInCart}
-          setItemsInCart={setItemsInCart}
+          inCart={inCart}
+          setInCart={setinCart}
         />
       )}
-      {/* <Cart items={items} open /> */}
+
+      {isCartOpen && (
+        <CartComponent
+          isMonthlyView={isMonthlyView}
+          inCart={inCart}
+          setInCart={setinCart}
+          setIsCartOpen={setIsCartOpen}
+        />
+      )}
+
       <Subscriptions
         isMonthlyView={isMonthlyView}
         setSubscriptionCandidate={setSubscriptionCandidate}

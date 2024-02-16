@@ -11,14 +11,14 @@ export const View = ({ isMonthlyView, setIsMonthlyView }: ViewProps) => {
         className={`${isMonthlyView ? "active" : "inactive"}`}
         onClick={() => setIsMonthlyView(true)}
       >
-        Monthly view
+        Month view
       </button>
       <button
         id="right-view"
         className={`${isMonthlyView ? "inactive" : "active"}`}
         onClick={() => setIsMonthlyView(false)}
       >
-        Weekly view
+        Week view
       </button>
     </div>
   );

@@ -1,4 +1,10 @@
-import { BravoIcon, AlphaIcon, CharlieIcon, ExtraIcon } from "../ui/icons";
+import {
+  BravoIcon,
+  AlphaIcon,
+  CharlieIcon,
+  ExtraIcon,
+  SVGProps,
+} from "../ui/icons";
 
 export interface Subscription {
   name: string;
@@ -6,7 +12,7 @@ export interface Subscription {
   weeklyPrice: number;
   subheading: string;
   description: string;
-  icon: () => JSX.Element;
+  icon: (props: SVGProps) => JSX.Element;
   featured: boolean;
 }
 

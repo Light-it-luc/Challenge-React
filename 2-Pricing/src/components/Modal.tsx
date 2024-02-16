@@ -1,22 +1,26 @@
+import type { Cart } from "../App";
 import { Subscription } from "../constants";
-import { Cart } from "../App";
+import { Backdrop } from "./Backdrop";
 
 interface ModalProps {
   setIsModalVisible: (visible: boolean) => void;
   subscriptionCandidate: Subscription;
-  itemsInCart: Cart;
-  setItemsInCart: (newSubscriptions: Cart) => void;
+  inCart: Cart;
+  setInCart: (cart: Cart) => void;
 }
 
 export const Modal = ({
   setIsModalVisible,
   subscriptionCandidate,
-  itemsInCart,
-  setItemsInCart,
+  inCart,
+  setInCart,
 }: ModalProps) => {
-  // REFACTOR
   const addToCart = (subscription: Subscription) => {
-    return;
+    const cartKey = subscription.name.toLowerCase() as keyof Cart;
+    const quantity = inCart[cartKey] ?? 0;
+    const updatedCart = { ...inCart };
+    updatedCart[cartKey] = quantity + 1;
+    setInCart(updatedCart);
   };
 
   const handleConfirm = () => {
@@ -29,7 +33,8 @@ export const Modal = ({
   };
 
   return (
-    <button id="backdrop-modal" onClick={handleCloseModal}>
+    <>
+      <Backdrop onBackdropClick={handleCloseModal} />
       <div id="modal">
         <button className="close-modal" onClick={handleCloseModal}>
           ×
@@ -48,6 +53,6 @@ export const Modal = ({
           </button>
         </div>
       </div>
-    </button>
+    </>
   );
 };

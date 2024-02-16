@@ -4,6 +4,9 @@ $charlie-color: #22C55E;
 $extra-color: #EF4444;
 $featured-color: #EA580C;
 
+$cart-icon-top: 7.5rem;
+$cart-icon-right: 3.25rem;
+
 .alpha-color { color: $alpha-color; }
 .bravo-color { color: $bravo-color; }
 .charlie-color { color: $charlie-color; }
@@ -77,10 +80,11 @@ header {
   border: solid 1px white;
 
   button {
-    font-size: 0.625rem;
-    padding: 0.5rem;
+    padding: 0.75rem;
     text-decoration: none;
     color: white;
+    font-size: 0.8rem;
+    font-weight: 300;
     transition: all 0.35s ease-in-out;
     background: none;
     border: none;
@@ -187,7 +191,7 @@ header {
 .primary-button { @include button($featured-color); color: white; }
 .secondary-button { @include button(white) }
 
-#backdrop-modal {
+.backdrop {
     @include flex-column();
     justify-content: center;
     position: fixed;
@@ -195,9 +199,9 @@ header {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 15;
-  }
+}
 
 #modal {
   @include flex-column();
@@ -205,7 +209,9 @@ header {
   justify-content: center;
   gap: 1.5rem;
   padding: 0.5rem 1.5rem;
-  position: relative;
+  position: fixed;
+  top: 25%;
+  bottom: 25%;
   text-align: center;
   width: 300px;
   height: 200px;
@@ -247,4 +253,56 @@ header {
     border: 1px solid $featured-color;
 
   }
+}
+
+#cart-icon {
+  position: fixed;
+  top: 7.5rem;
+  right: 3.25rem;
+  background: none;
+  border: none;
+}
+
+#cart {
+  position: fixed;
+  top: $cart-icon-top + 1.5rem;
+  right: $cart-icon-right + 1rem;
+  background-color: white;
+  width: 200px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+  color: $featured-color;
+  border-radius: 1rem;
+  border: solid 1px lightgray;
+
+  h2 {
+    width: 100%;
+    font-weight: 300;
+    margin: 0;
+    padding-left: 0.5rem;
+    border-bottom: solid 1px lightgray;
+  }
+
+  ul {
+    padding: 1rem 0;
+  }
+
+  li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px lightgray; ;
+  }
+}
+
+.second-layer { z-index: 15; }
+.first-layer { z-index: 25; }
+
+.no-scroll {
+  max-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
 }
