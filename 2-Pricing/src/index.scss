@@ -174,9 +174,9 @@ header {
       position: absolute;
       padding: 0.75rem 1.875rem;
       top: 0.6rem;
-      left: -1.875rem;
+      left: -7.5rem;
       transform: rotate(315deg);
-      background-color: var(--featured-color);
+      background-color: $featured-color;
       color: white;
       font-size: 0.5625rem;
       text-transform: uppercase;
