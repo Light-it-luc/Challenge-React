@@ -82,6 +82,12 @@ export const Cart = ({
             </div>
           </>
         )}
+
+        {subscriptionsWithItemsInCart.length === 0 && (
+          <div>
+            <h3>Your cart is empty</h3>
+          </div>
+        )}
       </div>
     </>
   );
