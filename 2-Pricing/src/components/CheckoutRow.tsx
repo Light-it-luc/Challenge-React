@@ -34,16 +34,20 @@ export const CheckoutRow = ({
   return (
     <li>
       <h3>{subscription.name}</h3>
-      <div>
-        <button onClick={handleDecrementCart}>-</button>
+      <div className="select-quantity">
+        <button className="quantity-button" onClick={handleDecrementCart}>
+          -
+        </button>
         <span>{quantityInCart}</span>
-        <button onClick={handleIncrementCart}>+</button>
+        <button className="quantity-button" onClick={handleIncrementCart}>
+          +
+        </button>
       </div>
-      <h4>
+      <h3>
         {isMonthlyView
           ? subscription.monthlyPrice * quantityInCart
           : subscription.weeklyPrice * quantityInCart}
-      </h4>
+      </h3>
     </li>
   );
 };

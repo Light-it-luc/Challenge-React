@@ -285,16 +285,49 @@ header {
     border-bottom: solid 1px lightgray;
   }
 
-  ul {
-    padding: 1rem 0;
-  }
+  ul { padding: 0 0 1rem 0; }
 
   li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: solid 1px lightgray; ;
+    padding: 1rem 0;
+    border-bottom: solid 1px lightgray;
+
+    h3 {
+      margin: 0;
+      font-weight: 300;
+    }
+
+    .bold { font-weight: 500; }
+    
+    .select-quantity {
+      display: flex;
+      flex-direction: row;
+      gap: 0.4rem;
+    }
+
+    .quantity-button {
+      margin: 0;
+      height: 22px;
+      width: 22px;
+      border-radius: 50%;
+      color: $featured-color;
+      border: 1px solid $featured-color;
+      background: none;
+    }
+  }
+
+  .space-between { justify-content: space-between; }
+
+  .w75 { width: 75%; }
+  .checkout-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1rem;
   }
 }
 

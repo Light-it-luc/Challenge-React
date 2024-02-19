@@ -58,16 +58,28 @@ export const Cart = ({
 
         {subscriptionsWithItemsInCart.length > 0 && (
           <>
-            {rows}
+            <ul>
+              <li>
+                <h3 className="bold">Item</h3>
+                <h3 className="bold">Quantity</h3>
+                <h3 className="bold">$</h3>
+              </li>
 
-            <li>
-              <h2>Total</h2> <h2>${totalPrice}</h2>
-            </li>
-            <Button
-              text="Checkout"
-              className="primary-button"
-              onClick={() => console.log("Checkout")}
-            />
+              {rows}
+
+              <li>
+                <h3 className="bold">Total</h3>{" "}
+                <h3 className="bold">${totalPrice}</h3>
+              </li>
+            </ul>
+
+            <div className="checkout-container">
+              <Button
+                text="Checkout"
+                className="primary-button w75"
+                onClick={() => console.log("Checkout")}
+              />
+            </div>
           </>
         )}
       </div>

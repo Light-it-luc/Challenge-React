@@ -316,14 +316,49 @@ header p {
   border-bottom: solid 1px lightgray;
 }
 #cart ul {
-  padding: 1rem 0;
+  padding: 0 0 1rem 0;
 }
 #cart li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 0;
   border-bottom: solid 1px lightgray;
+}
+#cart li h3 {
+  margin: 0;
+  font-weight: 300;
+}
+#cart li .bold {
+  font-weight: 500;
+}
+#cart li .select-quantity {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+}
+#cart li .quantity-button {
+  margin: 0;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  color: #EA580C;
+  border: 1px solid #EA580C;
+  background: none;
+}
+#cart .space-between {
+  justify-content: space-between;
+}
+#cart .w75 {
+  width: 75%;
+}
+#cart .checkout-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
 }
 
 .second-layer {

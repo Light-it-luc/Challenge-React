@@ -30,7 +30,7 @@ function App() {
       <button
         id="cart-icon"
         className={`${isCartOpen ? "first-layer" : "second-layer"}`}
-        onClick={() => setIsCartOpen(true)}
+        onClick={() => setIsCartOpen((prevIsCartOpen) => !prevIsCartOpen)}
       >
         <CartIcon />
       </button>
