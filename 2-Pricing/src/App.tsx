@@ -26,7 +26,7 @@ function App() {
     useState<Subscription>(subscriptions.bravo);
 
   return (
-    <main className={`${isCartOpen || isModalVisible ? "no-scroll" : ""}`}>
+    <>
       <button
         id="cart-icon"
         className={`${isCartOpen ? "first-layer" : "second-layer"}`}
@@ -34,10 +34,6 @@ function App() {
       >
         <CartIcon />
       </button>
-
-      <Header />
-
-      <View isMonthlyView={isMonthlyView} setIsMonthlyView={setIsMonthlyView} />
 
       {isModalVisible && (
         <Modal
@@ -57,12 +53,21 @@ function App() {
         />
       )}
 
-      <Subscriptions
-        isMonthlyView={isMonthlyView}
-        setSubscriptionCandidate={setSubscriptionCandidate}
-        setIsModalVisible={setIsModalVisible}
-      />
-    </main>
+      <main className={`${isCartOpen || isModalVisible ? "no-scroll" : ""}`}>
+        <Header />
+
+        <View
+          isMonthlyView={isMonthlyView}
+          setIsMonthlyView={setIsMonthlyView}
+        />
+
+        <Subscriptions
+          isMonthlyView={isMonthlyView}
+          setSubscriptionCandidate={setSubscriptionCandidate}
+          setIsModalVisible={setIsModalVisible}
+        />
+      </main>
+    </>
   );
 }
 
