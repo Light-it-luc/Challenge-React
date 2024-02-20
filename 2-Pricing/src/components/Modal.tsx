@@ -5,22 +5,22 @@ import { Backdrop } from "./Backdrop";
 interface ModalProps {
   setIsModalVisible: (visible: boolean) => void;
   subscriptionCandidate: Subscription;
-  inCart: Cart;
-  setInCart: (cart: Cart) => void;
+  cart: Cart;
+  setCart: (cart: Cart) => void;
 }
 
 export const Modal = ({
   setIsModalVisible,
   subscriptionCandidate,
-  inCart,
-  setInCart,
+  cart,
+  setCart,
 }: ModalProps) => {
   const addToCart = (subscription: Subscription) => {
     const cartKey = subscription.name.toLowerCase() as keyof Cart;
-    const quantity = inCart[cartKey] ?? 0;
-    const updatedCart = { ...inCart };
+    const quantity = cart[cartKey] ?? 0;
+    const updatedCart = { ...cart };
     updatedCart[cartKey] = quantity + 1;
-    setInCart(updatedCart);
+    setCart(updatedCart);
   };
 
   const handleConfirm = () => {

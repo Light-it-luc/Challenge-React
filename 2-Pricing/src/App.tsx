@@ -18,7 +18,7 @@ export interface Cart {
 }
 
 function App() {
-  const [inCart, setinCart] = useLocalStorage<Cart>("cart", {});
+  const [cart, setCart] = useLocalStorage<Cart>("cart", {});
   const [isMonthlyView, setIsMonthlyView] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -39,16 +39,16 @@ function App() {
         <Modal
           setIsModalVisible={setIsModalVisible}
           subscriptionCandidate={subscriptionCandidate}
-          inCart={inCart}
-          setInCart={setinCart}
+          cart={cart}
+          setCart={setCart}
         />
       )}
 
       {isCartOpen && (
         <CartComponent
           isMonthlyView={isMonthlyView}
-          inCart={inCart}
-          setInCart={setinCart}
+          cart={cart}
+          setCart={setCart}
           setIsCartOpen={setIsCartOpen}
         />
       )}

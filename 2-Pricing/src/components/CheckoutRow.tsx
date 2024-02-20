@@ -5,30 +5,30 @@ import { SubscriptionKey } from "./Cart";
 interface CheckoutRowProps {
   isMonthlyView: boolean;
   subscription: Subscription;
-  inCart: Cart;
-  setInCart: (cart: Cart) => void;
+  cart: Cart;
+  setCart: (cart: Cart) => void;
 }
 
 export const CheckoutRow = ({
   isMonthlyView,
   subscription,
-  inCart,
-  setInCart,
+  cart,
+  setCart,
 }: CheckoutRowProps) => {
   const key = subscription.name.toLowerCase() as SubscriptionKey;
-  const quantityInCart = inCart[key] ?? 0;
+  const quantityInCart = cart[key] ?? 0;
 
   const handleIncrementCart = () => {
-    const newCart = { ...inCart };
+    const newCart = { ...cart };
     newCart[key] = quantityInCart + 1;
-    setInCart(newCart);
+    setCart(newCart);
   };
 
   const handleDecrementCart = () => {
-    const newCart = { ...inCart };
+    const newCart = { ...cart };
     if (quantityInCart < 2) delete newCart[key];
     else newCart[key] = quantityInCart - 1;
-    setInCart(newCart);
+    setCart(newCart);
   };
 
   return (

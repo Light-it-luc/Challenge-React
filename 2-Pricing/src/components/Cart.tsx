@@ -8,16 +8,16 @@ export type SubscriptionKey = keyof typeof subscriptions;
 
 interface CartProps {
   isMonthlyView: boolean;
-  inCart: ICart;
+  cart: ICart;
   setIsCartOpen: (cartIsVisible: boolean) => void;
-  setInCart: (newCartContents: ICart) => void;
+  setCart: (newCartContents: ICart) => void;
 }
 
 export const Cart = ({
   isMonthlyView,
-  inCart,
+  cart,
   setIsCartOpen,
-  setInCart,
+  setCart,
 }: CartProps) => {
   const handleCloseCart = () => setIsCartOpen(false);
 
@@ -25,7 +25,7 @@ export const Cart = ({
     subscriptionName: SubscriptionKey
   ): Subscription => subscriptions[subscriptionName];
 
-  const subscriptionsWithItemsInCart = Object.entries(inCart)
+  const subscriptionsWithItemsInCart = Object.entries(cart)
     .filter(([subscriptionName, quantityInCart]) => quantityInCart > 0)
     .map(([subscriptionName, quantityInCart]) => subscriptionName);
 
@@ -33,13 +33,13 @@ export const Cart = ({
     <CheckoutRow
       key={subscriptionName}
       isMonthlyView={isMonthlyView}
-      inCart={inCart}
+      cart={cart}
       subscription={getSubscriptionByName(subscriptionName as SubscriptionKey)}
-      setInCart={setInCart}
+      setCart={setCart}
     />
   ));
 
-  const totalPrice = Object.entries(inCart)
+  const totalPrice = Object.entries(cart)
     .map(([subscriptionName, quantityInCart]) => {
       const subscription = getSubscriptionByName(
         subscriptionName as SubscriptionKey
