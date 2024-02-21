@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import type { Cart } from "../App";
 import { Subscription } from "../constants";
 import { Backdrop } from "./Backdrop";
@@ -6,7 +7,7 @@ interface ModalProps {
   setIsModalVisible: (visible: boolean) => void;
   subscriptionCandidate: Subscription;
   cart: Cart;
-  setCart: (cart: Cart) => void;
+  setCart: Dispatch<SetStateAction<Cart>>;
 }
 
 export const Modal = ({

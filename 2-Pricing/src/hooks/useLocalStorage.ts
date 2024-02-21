@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 
 export const useLocalStorage = <T>(
   key: string,
   defaultValue: T
-): [T, (newValue: T) => void] => {
+): [T, Dispatch<SetStateAction<T>>] => {
   const currentlyInLocalStorage = localStorage.getItem(key);
-  const itemIsNotInLocalStorage = !currentlyInLocalStorage;
+  const isInLocalStorage = !!currentlyInLocalStorage;
 
-  const initialValue = itemIsNotInLocalStorage
-    ? defaultValue
-    : (JSON.parse(currentlyInLocalStorage) as T);
+  const initialValue = isInLocalStorage
+    ? (JSON.parse(currentlyInLocalStorage) as T)
+    : defaultValue;
 
   const [item, setItem] = useState(initialValue);
 
-  const saveItem = (newValue: T): void => {
+  const saveItem: Dispatch<SetStateAction<T>> = (newValue) => {
     localStorage.setItem(key, JSON.stringify(newValue));
     setItem(newValue);
   };

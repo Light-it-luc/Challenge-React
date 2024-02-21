@@ -3,6 +3,7 @@ import { Backdrop } from "./Backdrop";
 import { Button } from "./Button";
 import { Subscription, subscriptions } from "../constants";
 import { CheckoutRow } from "./CheckoutRow";
+import { Dispatch, SetStateAction } from "react";
 
 export type SubscriptionKey = keyof typeof subscriptions;
 
@@ -13,8 +14,8 @@ const getSubscriptionByName = (
 interface CartProps {
   isMonthlyView: boolean;
   cart: ICart;
-  setIsCartOpen: (isCarteOpen: boolean) => void;
-  setCart: (cart: ICart) => void;
+  setIsCartOpen: Dispatch<SetStateAction<boolean>>;
+  setCart: Dispatch<SetStateAction<ICart>>;
 }
 
 export const Cart = ({
@@ -24,6 +25,26 @@ export const Cart = ({
   setCart,
 }: CartProps) => {
   const handleCloseCart = () => setIsCartOpen(false);
+
+  const handleIncrementCart = (subscription: SubscriptionKey) => {
+    const quantityInCart = cart[subscription] ?? 0;
+    let updatedCart = { ...cart };
+    updatedCart[subscription] = quantityInCart + 1;
+
+    setCart(updatedCart);
+  };
+
+  const handleDecrementCart = (subscription: SubscriptionKey) => {
+    const quantityInCart = cart[subscription] ?? 0;
+    let updatedCart = { ...cart };
+    if (quantityInCart <= 1) {
+      delete updatedCart[subscription];
+    } else {
+      updatedCart[subscription] = quantityInCart - 1;
+    }
+
+    setCart(updatedCart);
+  };
 
   const subscriptionsWithItemsInCart = Object.entries(cart)
     .filter(([subscriptionName, quantityInCart]) => quantityInCart > 0)
@@ -68,11 +89,18 @@ export const Cart = ({
                 <CheckoutRow
                   key={subscriptionName}
                   isMonthlyView={isMonthlyView}
-                  cart={cart}
                   subscription={getSubscriptionByName(
                     subscriptionName as SubscriptionKey
                   )}
-                  setCart={setCart}
+                  quantityInCart={
+                    cart[subscriptionName as SubscriptionKey] ?? 0
+                  }
+                  handleIncrementCart={() =>
+                    handleIncrementCart(subscriptionName as SubscriptionKey)
+                  }
+                  handleDecrementCart={() =>
+                    handleDecrementCart(subscriptionName as SubscriptionKey)
+                  }
                 />
               ))}
 
