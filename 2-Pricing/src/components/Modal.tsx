@@ -1,31 +1,19 @@
-import { Dispatch, SetStateAction } from "react";
-import type { Cart } from "../App";
 import { Subscription } from "../constants";
 import { Backdrop } from "./Backdrop";
 
 interface ModalProps {
   setIsModalVisible: (visible: boolean) => void;
   subscriptionCandidate: Subscription;
-  cart: Cart;
-  setCart: Dispatch<SetStateAction<Cart>>;
+  addToCart: () => void;
 }
 
 export const Modal = ({
   setIsModalVisible,
   subscriptionCandidate,
-  cart,
-  setCart,
+  addToCart,
 }: ModalProps) => {
-  const addToCart = (subscription: Subscription) => {
-    const cartKey = subscription.name.toLowerCase() as keyof Cart;
-    const quantity = cart[cartKey] ?? 0;
-    const updatedCart = { ...cart };
-    updatedCart[cartKey] = quantity + 1;
-    setCart(updatedCart);
-  };
-
   const handleConfirm = () => {
-    addToCart(subscriptionCandidate);
+    addToCart();
     handleCloseModal();
   };
 

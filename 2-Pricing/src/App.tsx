@@ -25,6 +25,14 @@ function App() {
   const [subscriptionCandidate, setSubscriptionCandidate] =
     useState<Subscription>(subscriptions.bravo);
 
+  const addToCart = (subscription: Subscription) => {
+    const cartKey = subscription.name.toLowerCase() as keyof Cart;
+    const quantity = cart[cartKey] ?? 0;
+    const updatedCart = { ...cart };
+    updatedCart[cartKey] = quantity + 1;
+    setCart(updatedCart);
+  };
+
   return (
     <>
       <button
@@ -39,8 +47,7 @@ function App() {
         <Modal
           setIsModalVisible={setIsModalVisible}
           subscriptionCandidate={subscriptionCandidate}
-          cart={cart}
-          setCart={setCart}
+          addToCart={() => addToCart(subscriptionCandidate)}
         />
       )}
 
