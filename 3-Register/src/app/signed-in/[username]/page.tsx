@@ -2,14 +2,21 @@ import { CelebrationIcon } from "@/ui/Icons";
 import { Ubuntu } from "next/font/google";
 
 const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["500"] });
-
 interface SignedInProps {
   params: {
     username: string;
   };
 }
 
-export default function SignedIn({ params: { username } }: SignedInProps) {
+const simulateDelay = async (miliseconds: number) => {
+  return await new Promise((resolve) => setTimeout(resolve, miliseconds));
+};
+
+export default async function SignedIn({
+  params: { username },
+}: SignedInProps) {
+  await simulateDelay(3000);
+
   return (
     <main className="flex flex-col flex-1 items-center justify-center p-16 gap-4">
       <CelebrationIcon />
