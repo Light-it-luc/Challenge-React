@@ -6,6 +6,7 @@ import {
   EmailIcon,
   LockIcon,
   PasswordInvisibleIcon,
+  PasswordVisibleIcon,
   UserIcon,
 } from "@/ui/Icons";
 import {
@@ -97,7 +98,9 @@ export const RegisterForm = () => {
         type={isPasswordVisible ? "text" : "password"}
         name="password"
         placeholder="Enter your Password"
-        SecondaryIcon={PasswordInvisibleIcon}
+        SecondaryIcon={
+          isPasswordVisible ? PasswordVisibleIcon : PasswordInvisibleIcon
+        }
         onSecondaryIconClick={() =>
           setIsPasswordVisible((isPasswordVisible) => !isPasswordVisible)
         }
@@ -111,7 +114,9 @@ export const RegisterForm = () => {
         type={isConfirmVisible ? "text" : "password"}
         name="confirm-password"
         placeholder="Confirm your Password"
-        SecondaryIcon={PasswordInvisibleIcon}
+        SecondaryIcon={
+          isConfirmVisible ? PasswordVisibleIcon : PasswordInvisibleIcon
+        }
         onSecondaryIconClick={() =>
           setIsConfirmVisible((isConfirmVisible) => !isConfirmVisible)
         }
