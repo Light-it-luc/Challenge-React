@@ -13,16 +13,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="h-full" lang="en">
+    <html className="h-full w-full" lang="en">
       <body
-        className={`flex flex-row h-full bg-custom-red text-custom-gray ${manrope.className}`}
+        className={`flex flex-row h-full w-full bg-custom-red text-custom-gray ${manrope.className}`}
       >
         <Image
           src="/RegisterIllustration.png"
           alt="Ilustration of user signing in"
           width={872}
           height={900}
-          className="hidden sm:block h-full object-cover"
+          className="hidden sm:block flex-2 h-full object-cover"
         />
         {children}
       </body>
