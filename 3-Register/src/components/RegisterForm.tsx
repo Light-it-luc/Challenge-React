@@ -15,8 +15,10 @@ import {
 } from "@/constants";
 import { useState } from "react";
 import { Button } from "./Button";
+import { useRouter } from "next/navigation";
 
 export const RegisterForm = () => {
+  const router = useRouter();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
 
@@ -50,6 +52,20 @@ export const RegisterForm = () => {
     setValue: setConfirmPassword,
     error: confirmPasswordError,
   } = useFormInput(ConfirmValidation);
+
+  const allInputsEmpty = !(email || username || password || confirmPassword);
+  const allInputsFilled = Boolean(
+    email && username && password && confirmPassword
+  );
+
+  const noValidationErrors = !(
+    emailError ||
+    usernameError ||
+    passwordError ||
+    confirmPasswordError
+  );
+
+  const buttonIsClickable = noValidationErrors && allInputsFilled;
 
   return (
     <form action="" method="POST" className="flex flex-col gap-4">
@@ -100,6 +116,16 @@ export const RegisterForm = () => {
           setIsConfirmVisible((isConfirmVisible) => !isConfirmVisible)
         }
       />
+
+      <Button
+        className={`${
+          buttonIsClickable || allInputsEmpty ? "bg-red-500" : "bg-gray-400"
+        } text-white py-3 rounded-full`}
+        active={buttonIsClickable}
+        onClick={() => router.push(`/signed-in/${username}`)}
+      >
+        <span>Register</span>
+      </Button>
     </form>
   );
 };
