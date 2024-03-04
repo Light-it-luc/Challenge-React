@@ -1,7 +1,6 @@
 import { CelebrationIcon } from "@/ui/Icons";
-import { Ubuntu } from "next/font/google";
+import { ubuntu } from "@/app/fonts";
 
-const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["500"] });
 interface SignedInProps {
   params: {
     username: string;
@@ -12,26 +11,20 @@ const simulateDelay = async (miliseconds: number) => {
   return await new Promise((resolve) => setTimeout(resolve, miliseconds));
 };
 
-export default async function SignedIn({
-  params: { username },
-}: SignedInProps) {
+const SignedIn = async ({ params: { username } }: SignedInProps) => {
   await simulateDelay(3000);
 
   return (
-    <main className="flex flex-col flex-1 items-center justify-center p-16 gap-4">
+    <div className="flex flex-col flex-1 items-center justify-center p-16 gap-4 font-medium">
       <CelebrationIcon />
-      <div>
-        <h2
-          className={`text-3xl text-center text-bold text-red-700 ${ubuntu.className}`}
-        >
-          Great!
-        </h2>
-        <h2
-          className={`text-3xl text-center text-bold text-red-700 max-w-64 ${ubuntu.className}`}
-        >
-          You signed in as {username}
-        </h2>
+      <div
+        className={`text-3xl text-center text-bold text-red-700 ${ubuntu.className}`}
+      >
+        <h2>Great!</h2>
+        <h2 className="max-w-64">You signed in as {username}</h2>
       </div>
-    </main>
+    </div>
   );
-}
+};
+
+export default SignedIn;

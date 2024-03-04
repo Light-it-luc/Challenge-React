@@ -1,24 +1,9 @@
-interface ButtonProps {
-  className?: string;
-  children: JSX.Element;
-  active: boolean;
-  onClick: () => void;
-}
+import { ComponentPropsWithoutRef } from "react";
 
-export const Button = ({
-  className,
-  children,
-  active,
-  onClick,
-}: ButtonProps) => {
+export const Button = (props: ComponentPropsWithoutRef<"button">) => {
   return (
-    <button
-      className={className}
-      type="button"
-      disabled={!active}
-      onClick={onClick}
-    >
-      {children}
+    <button {...props} type="button">
+      {props.children}
     </button>
   );
 };

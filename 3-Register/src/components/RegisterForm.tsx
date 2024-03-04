@@ -1,6 +1,6 @@
 "use client";
 
-import { Validation, useFormInput } from "@/hooks/useFormInput";
+import { useFormInput } from "@/hooks/useFormInput";
 import { Input } from "./Input";
 import {
   EmailIcon,
@@ -13,7 +13,7 @@ import {
   EmailValidation,
   PasswordValidation,
   UsernameValidation,
-} from "@/constants";
+} from "@/constants/inputValidations";
 import { useState } from "react";
 import { Button } from "./Button";
 import { useRouter } from "next/navigation";
@@ -126,7 +126,7 @@ export const RegisterForm = () => {
         className={`${
           buttonIsClickable || allInputsEmpty ? "bg-red-500" : "bg-gray-400"
         } text-white py-3 rounded-full`}
-        active={buttonIsClickable}
+        disabled={!buttonIsClickable}
         onClick={() => router.push(`/signed-in/${username}`)}
       >
         <span>Register</span>

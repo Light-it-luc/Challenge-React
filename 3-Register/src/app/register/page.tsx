@@ -1,12 +1,10 @@
 import { RegisterForm } from "@/components/RegisterForm";
-import { Ubuntu } from "next/font/google";
 import Link from "next/link";
+import { ubuntu } from "../fonts";
 
-const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["400", "700"] });
-
-export default function Register() {
+const Register = () => {
   return (
-    <main className="flex flex-col flex-1 min-w-[390px] p-16 gap-8 w-full">
+    <>
       <h1 className={`text-2xl font-medium ${ubuntu.className}`}>Sign Up</h1>
       <div className="flex flex-col gap-2 font-light">
         <p>If you already have an account registered</p>
@@ -22,6 +20,8 @@ export default function Register() {
       </div>
 
       <RegisterForm />
-    </main>
+    </>
   );
-}
+};
+
+export default Register;

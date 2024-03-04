@@ -1,17 +1,17 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, useState } from "react";
 
 export interface Validation {
   validator: (value: string) => boolean;
   error: string;
 }
 
-interface useInputReturn {
+interface UseInputReturn {
   value: string;
   setValue: Dispatch<string>;
   error: string;
 }
 
-export const useFormInput = (validations: Validation[]): useInputReturn => {
+export const useFormInput = (validations: Validation[]): UseInputReturn => {
   const [value, setValue] = useState("");
   const [inputErrorMessage, setInputErrorMessage] = useState("");
 

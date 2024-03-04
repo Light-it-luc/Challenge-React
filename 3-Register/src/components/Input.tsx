@@ -3,6 +3,12 @@
 import { SVGProps } from "@/ui/Icons";
 import { Dispatch } from "react";
 
+const toTitleCase = (str: string) => {
+  return str.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+  });
+};
+
 interface FormInputProps {
   PrimaryIcon: (props: SVGProps) => JSX.Element;
   value: string;
@@ -27,11 +33,6 @@ export const Input = ({
   onSecondaryIconClick,
 }: FormInputProps) => {
   const inputId = `${name}-input`;
-  const toTitleCase = (str: string) => {
-    return str.replace(/\w\S*/g, function (txt) {
-      return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
-    });
-  };
 
   return (
     <div className="relative flex flex-col gap-2 min-h-28">
@@ -56,7 +57,7 @@ export const Input = ({
         {SecondaryIcon && (
           <button
             type="button"
-            className="absolute right-4 "
+            className="absolute right-4"
             onClick={onSecondaryIconClick}
           >
             <SecondaryIcon />

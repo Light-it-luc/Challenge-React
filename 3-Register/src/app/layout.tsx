@@ -1,17 +1,12 @@
-import { Manrope } from "next/font/google";
 import Image from "next/image";
+import { manrope } from "./fonts";
 import "./globals.css";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-});
-
-export default function RootLayout({
+const Layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html className="h-full w-full" lang="en">
       <body
@@ -19,13 +14,17 @@ export default function RootLayout({
       >
         <Image
           src="/RegisterIllustration.png"
-          alt="Ilustration of user signing in"
+          alt=""
           width={872}
           height={900}
           className="hidden sm:block flex-2 h-full object-cover"
         />
-        {children}
+        <main className="flex flex-col flex-1 min-w-[390px] p-16 gap-8 w-full">
+          {children}
+        </main>
       </body>
     </html>
   );
-}
+};
+
+export default Layout;
