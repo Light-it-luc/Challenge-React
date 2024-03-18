@@ -3,35 +3,40 @@ import { useQuery } from "@tanstack/react-query";
 
 import { fetchProducts } from "~/api/products";
 import type { Product } from "~/api/products";
-import { ViewContext } from "~/App";
+import { QueryParamContext } from "~/App";
+import { PRODUCTS_PER_PAGE } from "~/constants";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { Error } from "./Error";
+import { ErrorComponent } from "./Error";
 import { Loader } from "./Loader";
 import { Products } from "./Products";
 
 export const ProductsContainer = () => {
-  const { view } = useContext(ViewContext);
-  const queryParams = new URLSearchParams(window.location.search);
+  const { queryParams } = useContext(QueryParamContext);
   const [favorites, setFavorites] = useLocalStorage<Product[]>("favorites", []);
 
+  const limit = Number(queryParams.get("limit") ?? PRODUCTS_PER_PAGE);
+  const search = queryParams.get("q") ?? "";
+
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["products", queryParams.toString()], //limit missing
-    queryFn: () => fetchProducts(),
-    keepPreviousData: true,
+    queryKey: ["products", { search, limit }],
+    queryFn: () => fetchProducts({ search, limit }),
   });
 
   if (isLoading) {
     return <Loader />;
   }
 
-  if (isError) {
+  if (isError || !data) {
     return (
-      <Error heading="Oops!" subheading="Looks like something went wrong..." />
+      <ErrorComponent
+        heading="Oops!"
+        subheading="Looks like something went wrong..."
+      />
     );
   }
 
-  const viewIsFavorites = view === "favorites";
-  const { products, total: apiTotalProducts } = { ...data }; // Refactor
+  const viewIsFavorites = queryParams.get("view") === "favorites";
+  const { products, total: apiTotalProducts } = data;
 
   const onFavoriteClick = (product: Product) => {
     const inFavorites = favorites.includes(product);
@@ -45,8 +50,8 @@ export const ProductsContainer = () => {
 
   return (
     <Products
-      products={(viewIsFavorites ? favorites : products)!}
-      apiTotalProducts={apiTotalProducts ?? 10}
+      products={viewIsFavorites ? favorites : products}
+      apiTotalProducts={apiTotalProducts}
       favorites={favorites}
       onFavoriteClick={onFavoriteClick}
     />

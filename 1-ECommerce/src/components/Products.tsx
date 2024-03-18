@@ -1,14 +1,13 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import type { Product } from "~/api/products";
 import { PRODUCTS_PER_PAGE } from "../constants";
 import { Button } from "./Button";
-import { Error } from "./Error";
+import { ErrorComponent } from "./Error";
 import { ProductCard } from "./ProductCard";
 
 const NothingToShow = () =>
-  Error({
+  ErrorComponent({
     heading: "Nothing to see here...",
     subheading: "No products to display",
   });
@@ -44,10 +43,9 @@ export const Products = ({
 }: ProductProps) => {
   const queryParams = new URLSearchParams(location.search);
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const view = String(queryParams.get("view")) as keyof typeof sortingFunctions;
-  const currentLimit = Number(queryParams.get("limit")) ?? PRODUCTS_PER_PAGE;
+  const currentLimit = Number(queryParams.get("limit") ?? PRODUCTS_PER_PAGE);
 
   const sortedProducts = products.toSorted(sortingFunctions[view]);
 
@@ -66,8 +64,6 @@ export const Products = ({
       { pathname: "/", search: queryParams.toString() },
       { replace: true },
     );
-
-    void queryClient.invalidateQueries("products");
   };
 
   const RenderedProducts = () => (

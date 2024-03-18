@@ -1,34 +1,32 @@
-import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { QueryParamContext } from "~/App";
 import { MagnifierIcon } from "../ui/Icons";
 
 export const Searchbar = () => {
-  const queryParams = new URLSearchParams(location.search);
+  const { queryParams, setQueryParams } = useContext(QueryParamContext);
   const [searchValue, setSearchValue] = useState(queryParams.get("q") ?? "");
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const handleSearchChange = (inputValue: string) => {
-    if (inputValue) {
-      queryParams.set("q", inputValue);
-    } else {
-      queryParams.delete("q");
-    }
-
-    queryParams.delete("limit");
-
     setSearchValue(inputValue);
+
+    setQueryParams(() => {
+      if (inputValue) {
+        queryParams.set("q", inputValue);
+      } else {
+        queryParams.delete("q");
+      }
+      queryParams.delete("limit");
+
+      return queryParams;
+    });
+
     navigate(
-      {
-        pathname: "/",
-        search: queryParams.toString(),
-      },
+      { pathname: "/", search: queryParams.toString() },
       { replace: true },
     );
-
-    void queryClient.invalidateQueries("products");
   };
 
   return (

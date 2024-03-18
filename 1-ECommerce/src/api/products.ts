@@ -23,20 +23,22 @@ interface DummyJsonApiResponseData {
   total: number;
 }
 
-export const fetchProducts = async () => {
-  const queryParams = new URLSearchParams(location.search);
-  const queryLimit = Number(queryParams.get("limit"));
+interface FetchProductsProps {
+  search: string;
+  limit: number;
+}
 
-  const limit =
-    queryLimit && queryLimit > PRODUCTS_PER_PAGE
-      ? queryLimit
-      : PRODUCTS_PER_PAGE;
+export const fetchProducts = async ({
+  search,
+  limit = PRODUCTS_PER_PAGE,
+}: FetchProductsProps) => {
+  const newLimit = limit > PRODUCTS_PER_PAGE ? limit : PRODUCTS_PER_PAGE;
 
   let url;
-  if (queryParams.get("q")) {
-    url = `https://dummyjson.com/products/search?q=${queryParams.get("q")}&limit=${limit}`;
+  if (search) {
+    url = `https://dummyjson.com/products/search?q=${search}&limit=${newLimit}`;
   } else {
-    url = `https://dummyjson.com/products?limit=${limit}`;
+    url = `https://dummyjson.com/products?limit=${newLimit}`;
   }
 
   const response = await axios.get<DummyJsonApiResponseData>(url);

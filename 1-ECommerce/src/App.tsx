@@ -1,23 +1,24 @@
 import "./index.css";
 
 import type { Dispatch, SetStateAction } from "react";
-import { createContext, useState } from "react";
+import { createContext } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { NavBar } from "./components/NavBar";
 import { ProductsContainer } from "./components/ProductsContainer";
 
-interface ViewContextValue {
-  view: string;
-  setView: Dispatch<SetStateAction<string>>;
+interface SearchParamContext {
+  queryParams: URLSearchParams;
+  setQueryParams: Dispatch<SetStateAction<URLSearchParams>>;
 }
 
-export const ViewContext = createContext({} as ViewContextValue);
+export const QueryParamContext = createContext({} as SearchParamContext);
 
 export default function App() {
-  const [view, setView] = useState("");
+  const [queryParams, setQueryParams] = useSearchParams();
 
   return (
-    <ViewContext.Provider value={{ view, setView }}>
+    <QueryParamContext.Provider value={{ queryParams, setQueryParams }}>
       <div className="contaiener h-full w-full py-8 lg:flex lg:flex-col">
         <NavBar />
 
@@ -29,6 +30,6 @@ export default function App() {
           <ProductsContainer />
         </main>
       </div>
-    </ViewContext.Provider>
+    </QueryParamContext.Provider>
   );
 }
