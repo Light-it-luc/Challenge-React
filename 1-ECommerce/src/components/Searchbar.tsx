@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import { MagnifierIcon } from "../ui/Icons";
@@ -7,6 +8,7 @@ export const Searchbar = () => {
   const queryParams = new URLSearchParams(location.search);
   const [searchValue, setSearchValue] = useState(queryParams.get("q") ?? "");
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const handleSearchChange = (inputValue: string) => {
     if (inputValue) {
@@ -14,6 +16,8 @@ export const Searchbar = () => {
     } else {
       queryParams.delete("q");
     }
+
+    queryParams.delete("limit");
 
     setSearchValue(inputValue);
     navigate(
@@ -23,6 +27,8 @@ export const Searchbar = () => {
       },
       { replace: true },
     );
+
+    void queryClient.invalidateQueries("products");
   };
 
   return (

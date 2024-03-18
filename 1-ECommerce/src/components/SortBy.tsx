@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { ViewContext } from "~/App";
 import { SearchArrowIcon } from "../ui/Icons";
 
 export const SortBy = () => {
+  const { setView } = useContext(ViewContext);
   const queryParams = new URLSearchParams(location.search);
   const [selectedOption, setSelectedOption] = useState(
     queryParams.get("view") ?? "",
@@ -28,17 +30,14 @@ export const SortBy = () => {
       queryParams.delete("view");
     }
 
+    queryParams.delete("limit");
+    setView(selectValue);
+
     navigate(
       { pathname: "/", search: queryParams.toString() },
       { replace: true },
     );
   };
-
-  const options = sortOptions.map((option) => (
-    <option key={option.id} value={option.value}>
-      {option.label}
-    </option>
-  ));
 
   return (
     <div className="relative h-full w-full md:w-36 lg:w-44">
@@ -49,7 +48,11 @@ export const SortBy = () => {
         value={selectedOption}
         onChange={(event) => handleSelectChange(event.target.value)}
       >
-        {options}
+        {sortOptions.map((option) => (
+          <option key={option.id} value={option.value}>
+            {option.label}
+          </option>
+        ))}
       </select>
 
       <SearchArrowIcon className="absolute right-4 top-3" />
