@@ -1,11 +1,10 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { QueryParamContext } from "~/App";
 import { SearchArrowIcon } from "../ui/Icons";
 
 export const SortBy = () => {
-  const { queryParams, setQueryParams } = useContext(QueryParamContext);
+  const [queryParams, setQueryParams] = useSearchParams();
   const [selectedOption, setSelectedOption] = useState(
     queryParams.get("view") ?? "",
   );

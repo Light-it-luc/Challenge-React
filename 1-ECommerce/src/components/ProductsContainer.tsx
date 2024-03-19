@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 
 import { fetchProducts } from "~/api/products";
 import type { Product } from "~/api/products";
-import { QueryParamContext } from "~/App";
 import { PRODUCTS_PER_PAGE } from "~/constants";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { ErrorComponent } from "./Error";
@@ -11,7 +10,7 @@ import { Loader } from "./Loader";
 import { Products } from "./Products";
 
 export const ProductsContainer = () => {
-  const { queryParams } = useContext(QueryParamContext);
+  const [queryParams] = useSearchParams();
   const [favorites, setFavorites] = useLocalStorage<Product[]>("favorites", []);
 
   const limit = Number(queryParams.get("limit") ?? PRODUCTS_PER_PAGE);
