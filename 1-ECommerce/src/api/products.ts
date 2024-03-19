@@ -16,7 +16,7 @@ export interface Product {
   images: string[];
 }
 
-interface DummyJsonApiResponseData {
+interface GetResponseData {
   limit: number;
   products: Product[];
   skip: number;
@@ -34,14 +34,11 @@ export const fetchProducts = async ({
 }: FetchProductsProps) => {
   const newLimit = limit > PRODUCTS_PER_PAGE ? limit : PRODUCTS_PER_PAGE;
 
-  let url;
-  if (search) {
-    url = `https://dummyjson.com/products/search?q=${search}&limit=${newLimit}`;
-  } else {
-    url = `https://dummyjson.com/products?limit=${newLimit}`;
-  }
+  const url = search
+    ? `https://dummyjson.com/products/search?q=${search}&limit=${newLimit}`
+    : `https://dummyjson.com/products?limit=${newLimit}`;
 
-  const response = await axios.get<DummyJsonApiResponseData>(url);
+  const response = await axios.get<GetResponseData>(url);
 
   return response.data;
 };
