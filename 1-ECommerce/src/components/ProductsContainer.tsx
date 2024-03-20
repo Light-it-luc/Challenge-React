@@ -5,7 +5,7 @@ import { fetchProducts } from "~/api/products";
 import type { Product } from "~/api/products";
 import { PRODUCTS_PER_PAGE } from "~/constants";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { ErrorComponent } from "./Error";
+import { Error } from "./Error";
 import { Loader } from "./Loader";
 import { Products } from "./Products";
 
@@ -27,10 +27,7 @@ export const ProductsContainer = () => {
 
   if (isError || !data) {
     return (
-      <ErrorComponent
-        heading="Oops!"
-        subheading="Looks like something went wrong..."
-      />
+      <Error heading="Oops!" subheading="Looks like something went wrong..." />
     );
   }
 

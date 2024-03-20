@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import type { Product } from "~/api/products";
 import { PRODUCTS_PER_PAGE } from "../constants";
 import { Button } from "./Button";
-import { ErrorComponent } from "./Error";
+import { Error } from "./Error";
 import { ProductCard } from "./ProductCard";
 
 const NothingToShow = () =>
-  ErrorComponent({
+  Error({
     heading: "Nothing to see here...",
     subheading: "No products to display",
   });
