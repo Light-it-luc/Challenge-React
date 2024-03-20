@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+
 import { MenuOptionArrow } from "../ui/Icons";
 
 interface Option {
@@ -24,7 +26,7 @@ export const MenuOption = ({
     <div className="text-red-600">{option.name}</div>
 
     <MenuOptionArrow
-      className={`transition-transform ${active ? "rotate-180" : ""}`}
+      className={twMerge("transition-transform", active && "rotate-180")}
     />
   </button>
 );
