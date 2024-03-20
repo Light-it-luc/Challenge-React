@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { SearchArrowIcon } from "../ui/Icons";
 
 export const SortBy = () => {
-  const queryParams = new URLSearchParams(location.search);
+  const [queryParams, setQueryParams] = useSearchParams();
   const [selectedOption, setSelectedOption] = useState(
     queryParams.get("view") ?? "",
   );
@@ -22,23 +22,19 @@ export const SortBy = () => {
   const handleSelectChange = (selectValue: string) => {
     setSelectedOption(selectValue);
 
-    if (selectValue) {
-      queryParams.set("view", selectValue);
-    } else {
-      queryParams.delete("view");
-    }
+    setQueryParams(() => {
+      selectValue
+        ? queryParams.set("view", selectValue)
+        : queryParams.delete("view");
+
+      return queryParams;
+    });
 
     navigate(
       { pathname: "/", search: queryParams.toString() },
       { replace: true },
     );
   };
-
-  const options = sortOptions.map((option) => (
-    <option key={option.id} value={option.value}>
-      {option.label}
-    </option>
-  ));
 
   return (
     <div className="relative h-full w-full md:w-36 lg:w-44">
@@ -49,7 +45,11 @@ export const SortBy = () => {
         value={selectedOption}
         onChange={(event) => handleSelectChange(event.target.value)}
       >
-        {options}
+        {sortOptions.map((option) => (
+          <option key={option.id} value={option.value}>
+            {option.label}
+          </option>
+        ))}
       </select>
 
       <SearchArrowIcon className="absolute right-4 top-3" />

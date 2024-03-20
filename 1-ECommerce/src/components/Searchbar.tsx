@@ -1,26 +1,29 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { MagnifierIcon } from "../ui/Icons";
 
 export const Searchbar = () => {
-  const queryParams = new URLSearchParams(location.search);
+  const [queryParams, setQueryParams] = useSearchParams();
   const [searchValue, setSearchValue] = useState(queryParams.get("q") ?? "");
   const navigate = useNavigate();
 
   const handleSearchChange = (inputValue: string) => {
-    if (inputValue) {
-      queryParams.set("q", inputValue);
-    } else {
-      queryParams.delete("q");
-    }
-
     setSearchValue(inputValue);
+
+    setQueryParams(() => {
+      if (inputValue) {
+        queryParams.set("q", inputValue);
+      } else {
+        queryParams.delete("q");
+      }
+      queryParams.delete("limit");
+
+      return queryParams;
+    });
+
     navigate(
-      {
-        pathname: "/",
-        search: queryParams.toString(),
-      },
+      { pathname: "/", search: queryParams.toString() },
       { replace: true },
     );
   };

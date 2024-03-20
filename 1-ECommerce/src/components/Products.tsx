@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
+import type { Product } from "~/api/products";
 import { PRODUCTS_PER_PAGE } from "../constants";
-import type { Product } from "../hooks/useFilteredProducts";
 import { Button } from "./Button";
 import { Error } from "./Error";
 import { ProductCard } from "./ProductCard";
@@ -31,8 +33,6 @@ interface ProductProps {
   favorites: Product[];
   onFavoriteClick: (product: Product) => void;
   apiTotalProducts: number;
-  limit: number;
-  setLimit: (newLimit: number) => void;
 }
 
 export const Products = ({
@@ -40,23 +40,30 @@ export const Products = ({
   favorites,
   onFavoriteClick,
   apiTotalProducts,
-  limit,
-  setLimit,
 }: ProductProps) => {
   const queryParams = new URLSearchParams(location.search);
+  const navigate = useNavigate();
 
   const view = String(queryParams.get("view")) as keyof typeof sortingFunctions;
+  const currentLimit = Number(queryParams.get("limit") ?? PRODUCTS_PER_PAGE);
+
   const sortedProducts = products.toSorted(sortingFunctions[view]);
 
-  const isLoadMoreVisible = products.length > 0 && limit < apiTotalProducts;
+  const isLoadMoreVisible =
+    products.length > 0 && currentLimit < apiTotalProducts;
 
-  const handleLoadMoreClick = () => {
+  const handleLoadMoreClick = (currentLimit: number) => {
     const newLimit =
-      limit + PRODUCTS_PER_PAGE < apiTotalProducts
-        ? limit + PRODUCTS_PER_PAGE
+      currentLimit + PRODUCTS_PER_PAGE < apiTotalProducts
+        ? currentLimit + PRODUCTS_PER_PAGE
         : apiTotalProducts;
 
-    setLimit(newLimit);
+    queryParams.set("limit", JSON.stringify(newLimit));
+
+    navigate(
+      { pathname: "/", search: queryParams.toString() },
+      { replace: true },
+    );
   };
 
   const RenderedProducts = () => (
@@ -75,7 +82,10 @@ export const Products = ({
         ))}
       </div>
       {isLoadMoreVisible && (
-        <Button text="Load more" onButtonClick={handleLoadMoreClick} />
+        <Button
+          text="Load more"
+          onButtonClick={() => handleLoadMoreClick(currentLimit)}
+        />
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import type { Product } from "../hooks/useFilteredProducts";
+import type { Product } from "~/api/products";
 import { FavoriteButton } from "./FavoriteButton";
 
 interface ProductCardProp {
