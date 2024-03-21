@@ -17,11 +17,12 @@ interface CartProps {
 }
 
 export const Cart = ({ isMonthlyView, setIsCartOpen }: CartProps) => {
-  const {
-    cart,
-    increment: handleIncrementCart,
-    decrement: handleDecrementCart,
-  } = useCartStore();
+  const cart = useCartStore((state) => state.cart);
+  const [handleIncrementCart, handleDecrementCart] = useCartStore((state) => [
+    state.increment,
+    state.decrement,
+  ]);
+
   const handleCloseCart = () => setIsCartOpen(false);
 
   const subscriptionsWithItemsInCart = Object.entries(cart)
