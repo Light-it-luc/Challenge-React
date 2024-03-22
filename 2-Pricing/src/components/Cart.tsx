@@ -1,4 +1,4 @@
-import type { Cart as ICart } from "../App";
+import { useCartStore } from "../store/cartStore";
 import { Backdrop } from "./Backdrop";
 import { Button } from "./Button";
 import { Subscription, subscriptions } from "../constants";
@@ -13,38 +13,17 @@ const getSubscriptionByName = (
 
 interface CartProps {
   isMonthlyView: boolean;
-  cart: ICart;
   setIsCartOpen: Dispatch<SetStateAction<boolean>>;
-  setCart: Dispatch<SetStateAction<ICart>>;
 }
 
-export const Cart = ({
-  isMonthlyView,
-  cart,
-  setIsCartOpen,
-  setCart,
-}: CartProps) => {
+export const Cart = ({ isMonthlyView, setIsCartOpen }: CartProps) => {
+  const cart = useCartStore((state) => state.cart);
+  const [handleIncrementCart, handleDecrementCart] = useCartStore((state) => [
+    state.increment,
+    state.decrement,
+  ]);
+
   const handleCloseCart = () => setIsCartOpen(false);
-
-  const handleIncrementCart = (subscription: SubscriptionKey) => {
-    const quantityInCart = cart[subscription] ?? 0;
-    let updatedCart = { ...cart };
-    updatedCart[subscription] = quantityInCart + 1;
-
-    setCart(updatedCart);
-  };
-
-  const handleDecrementCart = (subscription: SubscriptionKey) => {
-    const quantityInCart = cart[subscription] ?? 0;
-    let updatedCart = { ...cart };
-    if (quantityInCart <= 1) {
-      delete updatedCart[subscription];
-    } else {
-      updatedCart[subscription] = quantityInCart - 1;
-    }
-
-    setCart(updatedCart);
-  };
 
   const subscriptionsWithItemsInCart = Object.entries(cart)
     .filter(([subscriptionName, quantityInCart]) => quantityInCart > 0)

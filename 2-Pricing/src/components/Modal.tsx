@@ -1,19 +1,23 @@
 import { Subscription } from "../constants";
+import { useCartStore } from "../store/cartStore";
 import { Backdrop } from "./Backdrop";
+import { SubscriptionKey } from "./Cart";
 
 interface ModalProps {
   setIsModalVisible: (visible: boolean) => void;
   subscriptionCandidate: Subscription;
-  addToCart: () => void;
 }
 
 export const Modal = ({
   setIsModalVisible,
   subscriptionCandidate,
-  addToCart,
 }: ModalProps) => {
+  const increment = useCartStore((state) => state.increment);
+
   const handleConfirm = () => {
-    addToCart();
+    const candidateCartKey =
+      subscriptionCandidate.name.toLocaleLowerCase() as SubscriptionKey;
+    increment(candidateCartKey);
     handleCloseModal();
   };
 
