@@ -9,7 +9,7 @@ import {
   UserIcon,
 } from "@/ui/Icons";
 import { RegisterSchema } from "@/constants/inputValidations";
-import type { FormType } from "@/constants/inputValidations";
+import type { RegisterFormType } from "@/constants/inputValidations";
 import { useState } from "react";
 import { Button } from "./Button";
 import { useRouter } from "next/navigation";
@@ -25,7 +25,7 @@ export const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormType>({ resolver: zodResolver(RegisterSchema) });
+  } = useForm<RegisterFormType>({ resolver: zodResolver(RegisterSchema) });
 
   return (
     <form
