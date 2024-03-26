@@ -1,6 +1,5 @@
 "use client";
 
-import { useFormInput } from "@/hooks/useFormInput";
 import { Input } from "./Input";
 import {
   EmailIcon,
@@ -9,95 +8,59 @@ import {
   PasswordVisibleIcon,
   UserIcon,
 } from "@/ui/Icons";
-import {
-  EmailValidation,
-  PasswordValidation,
-  UsernameValidation,
-} from "@/constants/inputValidations";
+import { RegisterSchema } from "@/constants/inputValidations";
+import type { FormType } from "@/constants/inputValidations";
 import { useState } from "react";
 import { Button } from "./Button";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { twMerge } from "tailwind-merge";
 
 export const RegisterForm = () => {
   const router = useRouter();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
-
   const {
-    value: email,
-    setValue: setEmail,
-    error: emailError,
-  } = useFormInput(EmailValidation);
-
-  const {
-    value: username,
-    setValue: setUsername,
-    error: usernameError,
-  } = useFormInput(UsernameValidation);
-
-  const {
-    value: password,
-    setValue: setPassword,
-    error: passwordError,
-  } = useFormInput(PasswordValidation);
-
-  const ConfirmValidation = [
-    {
-      validator: (confirm: string) => password === confirm,
-      error: "Password and Confirm don't match",
-    },
-  ];
-
-  const {
-    value: confirmPassword,
-    setValue: setConfirmPassword,
-    error: confirmPasswordError,
-  } = useFormInput(ConfirmValidation);
-
-  const allInputsEmpty = !(email || username || password || confirmPassword);
-  const allInputsFilled = Boolean(
-    email && username && password && confirmPassword
-  );
-
-  const noValidationErrors = !(
-    emailError ||
-    usernameError ||
-    passwordError ||
-    confirmPasswordError
-  );
-
-  const buttonIsClickable = noValidationErrors && allInputsFilled;
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormType>({ resolver: zodResolver(RegisterSchema) });
 
   return (
-    <form action="" method="POST" className="flex flex-col gap-4">
+    <form
+      action=""
+      method="POST"
+      className="flex flex-col gap-4"
+      onSubmit={handleSubmit((data) =>
+        router.push(`/signed-in/${data.username}`)
+      )}
+    >
       <Input
         PrimaryIcon={EmailIcon}
-        errorMessage={emailError}
-        value={email}
-        setValue={setEmail}
         type="email"
-        name="email"
+        label="Email"
+        errorMessage={errors.email?.message}
         placeholder="Enter your email address"
+        {...register("email")}
       />
 
       <Input
         PrimaryIcon={UserIcon}
-        value={username}
-        setValue={setUsername}
-        errorMessage={usernameError}
-        type="test"
-        name="username"
+        type="text"
+        label="Username"
         placeholder="Enter your User name"
+        errorMessage={errors.username?.message}
+        {...register("username")}
       />
 
       <Input
         PrimaryIcon={LockIcon}
-        value={password}
-        setValue={setPassword}
-        errorMessage={passwordError}
         type={isPasswordVisible ? "text" : "password"}
-        name="password"
+        label="Password"
         placeholder="Enter your Password"
+        errorMessage={errors.password?.message}
+        {...register("password")}
         SecondaryIcon={
           isPasswordVisible ? PasswordVisibleIcon : PasswordInvisibleIcon
         }
@@ -108,12 +71,11 @@ export const RegisterForm = () => {
 
       <Input
         PrimaryIcon={LockIcon}
-        value={confirmPassword}
-        setValue={setConfirmPassword}
-        errorMessage={confirmPasswordError}
         type={isConfirmVisible ? "text" : "password"}
-        name="confirm-password"
+        label="Confirm Password"
         placeholder="Confirm your Password"
+        errorMessage={errors.confirm?.message}
+        {...register("confirm")}
         SecondaryIcon={
           isConfirmVisible ? PasswordVisibleIcon : PasswordInvisibleIcon
         }
@@ -123,11 +85,10 @@ export const RegisterForm = () => {
       />
 
       <Button
-        className={`${
-          buttonIsClickable || allInputsEmpty ? "bg-red-500" : "bg-gray-400"
-        } text-white py-3 rounded-full`}
-        disabled={!buttonIsClickable}
-        onClick={() => router.push(`/signed-in/${username}`)}
+        className={twMerge(
+          "text-white py-3 rounded-full bg-gray-400",
+          errors && "bg-red-500"
+        )}
       >
         <span>Register</span>
       </Button>
