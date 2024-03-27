@@ -1,11 +1,14 @@
 import { RegisterForm } from "@/components/RegisterForm";
 import Link from "next/link";
 import { ubuntu } from "../fonts";
+import { twMerge } from "tailwind-merge";
 
 const Register = () => {
   return (
     <>
-      <h1 className={`text-2xl font-medium ${ubuntu.className}`}>Sign Up</h1>
+      <h1 className={twMerge("text-2xl font-medium", ubuntu.className)}>
+        Sign Up
+      </h1>
       <div className="flex flex-col gap-2 font-light">
         <p>If you already have an account registered</p>
         <p>
