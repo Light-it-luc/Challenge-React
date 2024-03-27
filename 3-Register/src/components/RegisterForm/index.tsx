@@ -8,7 +8,7 @@ import {
   PasswordVisibleIcon,
   UserIcon,
 } from "@/ui/Icons";
-import { RegisterSchema } from "@/components/RegisterForm/registerSchema";
+import { registerSchema } from "@/components/RegisterForm/registerSchema";
 import type { RegisterFormType } from "@/components/RegisterForm/registerSchema";
 import { useState } from "react";
 import { Button } from "../Button";
@@ -25,7 +25,7 @@ export const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormType>({ resolver: zodResolver(RegisterSchema) });
+  } = useForm<RegisterFormType>({ resolver: zodResolver(registerSchema) });
 
   return (
     <form

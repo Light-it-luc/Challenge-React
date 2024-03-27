@@ -4,7 +4,7 @@ const availableDomains = ["@gmail.com", "@hotmail.com", "@lightit.io"];
 const emailDomainIsValid = (email: string) =>
   availableDomains.some((domain) => email.endsWith(domain));
 
-export const RegisterSchema = z
+export const registerSchema = z
   .object({
     email: z.string().email().refine(emailDomainIsValid, {
       message: "Email must end with @lightit.io, @hotmail.com or @gmail.com.",
@@ -34,4 +34,4 @@ export const RegisterSchema = z
     path: ["confirm"],
   });
 
-export type RegisterFormType = z.infer<typeof RegisterSchema>;
+export type RegisterFormType = z.infer<typeof registerSchema>;
