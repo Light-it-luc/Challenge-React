@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "./Input";
+import { Input } from "../Input";
 import {
   EmailIcon,
   LockIcon,
@@ -8,10 +8,10 @@ import {
   PasswordVisibleIcon,
   UserIcon,
 } from "@/ui/Icons";
-import { RegisterSchema } from "@/constants/inputValidations";
-import type { RegisterFormType } from "@/constants/inputValidations";
+import { RegisterSchema } from "@/components/RegisterForm/registerSchema";
+import type { RegisterFormType } from "@/components/RegisterForm/registerSchema";
 import { useState } from "react";
-import { Button } from "./Button";
+import { Button } from "../Button";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -29,8 +29,6 @@ export const RegisterForm = () => {
 
   return (
     <form
-      action=""
-      method="POST"
       className="flex flex-col gap-4"
       onSubmit={handleSubmit((data) =>
         router.push(`/signed-in/${data.username}`)
